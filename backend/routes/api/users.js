@@ -10,9 +10,11 @@ const router = express.Router();
 
 const validateSignup = [
     check('firstName')
-      .exists({ checkFalsy: true }),
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a first name.'),
     check('lastName')
-      .exists({ checkFalsy: true }),
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a last name.'),
     check('email')
       .exists({ checkFalsy: true })
       .isEmail()
