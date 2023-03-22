@@ -25,7 +25,7 @@ module.exports = {
       state: 'Texas',
       country: 'USA',
       lat: 53.343,
-      lng: 162.567,
+      lng: 62.567,
       name: 'The Bloomhouse',
       description: 'When you stay at the Bloomhouse, you are entering a place where magic can and will happen.',
       price: 591
@@ -37,7 +37,7 @@ module.exports = {
       state: 'Colorado',
       country: 'USA',
       lat: 63.744,
-      lng: 242.757,
+      lng: 22.757,
       name: 'Earthouse',
       description: 'Earthouse offers unique architectural design providing guests with an open inviting interior complete with high-end furnishings, modern decor, and abundant natural light.',
       price: 357
@@ -49,7 +49,7 @@ module.exports = {
       state: 'California',
       country: 'USA',
       lat: 54.133,
-      lng: 172.457,
+      lng: 12.457,
       name: 'Naturalist Boudoir',
       description: 'Nestled in the heart of the Big Thicket, our Naturalist Boudoir B&B has everything you need to revitalize your senses.',
       price: 380
@@ -61,7 +61,7 @@ module.exports = {
       state: 'Texas',
       country: 'USA',
       lat: 83.343,
-      lng: 742.567,
+      lng: 72.567,
       name: 'Kettle House',
       description: 'This home has foam insulation and central AC for ultimate comfort!',
       price: 355
@@ -73,7 +73,7 @@ module.exports = {
       state: 'Mexico State',
       country: 'Mexico',
       lat: 93.897,
-      lng: 982.667,
+      lng: 98.667,
       name: 'Casa Xochi',
       description: 'Beautiful residence of minimalist construction.',
       price: 397
