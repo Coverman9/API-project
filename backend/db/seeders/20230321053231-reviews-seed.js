@@ -48,6 +48,36 @@ module.exports = {
       review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
       stars: 4
     },
+    {
+      spotId: 5,
+      userId: 1,
+      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      stars: 5
+    },
+    {
+      spotId: 4,
+      userId: 2,
+      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      stars: 5
+    },
+    {
+      spotId: 3,
+      userId: 3,
+      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      stars: 2
+    },
+    {
+      spotId: 2,
+      userId: 1,
+      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      stars: 4
+    },
+    {
+      spotId: 1,
+      userId: 1,
+      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      stars: 4
+    },
    ], {})
   },
 
