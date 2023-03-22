@@ -87,7 +87,7 @@ router.get("/current", requireAuth, async (req, res) => {
   }
 
   for (let spot of spotObjects) {
-    console.log(spot);
+    //console.log(spot);
     if (!Object.keys(spot).length) break;
     const review = await Review.findOne({
       where: {
