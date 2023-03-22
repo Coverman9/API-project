@@ -284,7 +284,7 @@ router.put("/:spotId", requireAuth, async (req, res, next) => {
     const err = new Error("Spot couldn't be found");
     res.status(404);
     return next(err);
-  }
+  } 
   await spot.update({
     address,
     city,
