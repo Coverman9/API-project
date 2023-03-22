@@ -161,8 +161,8 @@ router.get("/:spotId", async (req, res, next) => {
   }
 
   if (spotObject.User) {
-    spotObject.Owner = spotObject.User
-    delete spotObject.User
+    spotObject.Owner = spotObject.User;
+    delete spotObject.User;
   }
 
   res.json(spotObject);
@@ -191,11 +191,16 @@ router.post("/", requireAuth, async (req, res) => {
 });
 
 //Add an Image to a Spot based on the Spot's id
-router.post("/:spotId/images", requireAuth, async (req, res) => {
+router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   const { user } = req;
   const { url, preview } = req.body;
 
   const spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    res.status(404);
+    return next(err);
+  }
   const newImg = await spot.createSpotImage({
     url,
     preview,
@@ -210,11 +215,16 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 });
 
 //Edit a Spot
-router.put("/:spotId", requireAuth, async (req, res) => {
+router.put("/:spotId", requireAuth, async (req, res, next) => {
   const { user } = req;
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
   const spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    res.status(404);
+    return next(err);
+  }
   await spot.update({
     address,
     city,
@@ -234,9 +244,9 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
   const { user } = req;
 
   const deleteSpot = await Spot.findByPk(req.params.spotId);
-  if (deleteSpot.ownerId !== user.id) {
-    const err = new Error("You can delete only your spot");
-    err.status(404);
+  if (!deleteSpot) {
+    const err = new Error("Spot couldn't be found");
+    res.status(404);
     return next(err);
   }
 
