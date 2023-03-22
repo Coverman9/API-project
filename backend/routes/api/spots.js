@@ -14,6 +14,66 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
+//Get all Reviews by a Spot's id
+router.get("/:spotId/reviews", async (req, res, next) => {
+  const review = await Review.findAll({
+    where: {
+      spotId: req.params.spotId,
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+      {
+        model: ReviewImage,
+        attributes: ["id", "url"],
+      },
+    ],
+  });
+
+  if (!review.length) {
+    const err = new Error("Spot couldn't be found");
+    res.status(404);
+    return next(err);
+  }
+
+  res.json({
+    Reviews: review,
+  });
+});
+
+//Create a Review for a Spot based on the Spot's id
+router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const { review, stars } = req.body;
+  const spotId = parseInt(req.params.spotId)
+
+  const reviews = await Review.findAll()
+  const reviewsArr = []
+  reviews.forEach(review => reviewsArr.push(review.toJSON()))
+  for (let review of reviewsArr) {
+    if (review.userId == user.id && review.spotId == req.params.spotId) {
+      const err = new Error("User already has a review for this page")
+      res.status(403)
+      return next(err)
+    } else if (review.spotId != spotId) {
+      const err = new Error("Spot couldn't be found")
+      res.status(404)
+      return next(err)
+    }
+  }
+  const newReview = await Review.create({
+    userId: user.id,
+    spotId: spotId,
+    review,
+    stars
+  });
+  res.status(201)
+
+  res.json(newReview)
+});
+
 //Get al Spots
 router.get("/", async (req, res) => {
   const spots = await Spot.findAll({
