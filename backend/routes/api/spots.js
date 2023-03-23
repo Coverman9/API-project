@@ -93,8 +93,8 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   if (startDate < currentDate) {
     validationErrors.startDate = "startDate cannot be in the past";
   }
-  if (endDate < startDate) {
-    console.log("asdasd")
+  if (endDate <= startDate) {
+    console.log("asdasd");
     validationErrors.endDate = "endDate cannot be on or before startDate";
   }
   if (Object.keys(validationErrors).length) {
@@ -136,8 +136,8 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
     spotId: Number(req.params.spotId),
     userId: user.id,
     startDate,
-    endDate
-  })
+    endDate,
+  });
 
   res.json(booking);
 });
