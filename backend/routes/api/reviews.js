@@ -76,7 +76,6 @@ router.get("/current", requireAuth, async (req, res) => {
   });
 });
 
-
 //Add an Image to a Review based on the Review's id
 router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   const { url } = req.body;
@@ -99,14 +98,16 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   }
   const reviewImages = await ReviewImage.findAll({
     where: {
-        reviewId
-    }
-  })
+      reviewId,
+    },
+  });
   if (reviewImages.length > 10) {
-    const err = new Error("Maximum number of images for this resource was reached")
-    res.status(404)
-    return next(err)
-}
+    const err = new Error(
+      "Maximum number of images for this resource was reached"
+    );
+    res.status(404);
+    return next(err);
+  }
   const newImage = await ReviewImage.create({
     reviewId,
     url,
@@ -114,28 +115,48 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   res.json(newImage);
 });
 
-
 //Edit a Review
-router.put('/:reviewId', requireAuth, async(req, res, next) => {
-    const { user } = req
-    const { review, stars } = req.body
-    const updatedReview = await Review.findByPk(req.params.reviewId)
-    if (!updatedReview) {
-        const err = new Error("Review couldn't be found")
-        res.status(404)
-        return next(err)
-    }
-    if(updatedReview.toJSON().userId == user.id) {
-        await updatedReview.update({
-            review,
-            stars
-        })
-    } else {
-        const err = new Error("Can edit only your reviews")
-        res.status(404)
-        return next(err)
-    }
-    res.json(updatedReview)
-})
+router.put("/:reviewId", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const { review, stars } = req.body;
+  const updatedReview = await Review.findByPk(req.params.reviewId);
+  if (!updatedReview) {
+    const err = new Error("Review couldn't be found");
+    res.status(404);
+    return next(err);
+  }
+  if (updatedReview.toJSON().userId == user.id) {
+    await updatedReview.update({
+      review,
+      stars,
+    });
+  } else {
+    const err = new Error("Can edit only your reviews");
+    res.status(404);
+    return next(err);
+  }
+  res.json(updatedReview);
+});
+
+//Delete a Review
+router.delete("/:reviewId", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const deleteReview = await Review.findByPk(req.params.reviewId);
+  if (!deleteReview) {
+    const err = new Error("Review couldn't be found");
+    res.status(404);
+    return next(err);
+  }
+  if (deleteReview.toJSON().userId == user.id) {
+    await deleteReview.destroy();
+    res.status(200);
+    res.json({
+      message: "Successfully deleted",
+    });
+  } else {
+    const err = new Error("Can't delete not yours review");
+    return next(err);
+  }
+});
 
 module.exports = router;

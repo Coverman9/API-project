@@ -14,6 +14,11 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
+
+//Get all Bookings for a Spot based on the Spot's id
+
+
+
 //Get all Reviews by a Spot's id
 router.get("/:spotId/reviews", async (req, res, next) => {
   const review = await Review.findAll({
@@ -284,7 +289,7 @@ router.put("/:spotId", requireAuth, async (req, res, next) => {
     const err = new Error("Spot couldn't be found");
     res.status(404);
     return next(err);
-  } 
+  }
   await spot.update({
     address,
     city,
