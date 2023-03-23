@@ -14,10 +14,50 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
-
 //Get all Bookings for a Spot based on the Spot's id
+router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const spotId = req.params.spotId;
+  const id = parseInt(spotId);
 
+  const userBooking = await Booking.findAll({
+    where: {
+      spotId: id,
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+    ],
+  });
 
+  if(!userBooking.length) {
+    const err = new Error("Spot couldn't be found")
+    res.status(404)
+    return next(err)
+  }
+
+  const bookingObjects = [];
+  if (userBooking.length) {
+    userBooking.forEach((booking) => {
+      if (booking.toJSON().userId == user.id) {
+        bookingObjects.push(booking);
+      } else {
+        let notOwnerSpot = {
+          spotId: booking.spotId,
+          startDate: booking.startDate,
+          endDate: booking.endDate,
+        };
+        bookingObjects.push(notOwnerSpot);
+      }
+    });
+  }
+
+  res.json({
+    Booking: bookingObjects,
+  });
+});
 
 //Get all Reviews by a Spot's id
 router.get("/:spotId/reviews", async (req, res, next) => {
@@ -52,31 +92,31 @@ router.get("/:spotId/reviews", async (req, res, next) => {
 router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
   const { user } = req;
   const { review, stars } = req.body;
-  const spotId = parseInt(req.params.spotId)
+  const spotId = parseInt(req.params.spotId);
 
-  const reviews = await Review.findAll()
-  const reviewsArr = []
-  reviews.forEach(review => reviewsArr.push(review.toJSON()))
+  const reviews = await Review.findAll();
+  const reviewsArr = [];
+  reviews.forEach((review) => reviewsArr.push(review.toJSON()));
   for (let review of reviewsArr) {
     if (review.userId == user.id && review.spotId == req.params.spotId) {
-      const err = new Error("User already has a review for this page")
-      res.status(403)
-      return next(err)
+      const err = new Error("User already has a review for this page");
+      res.status(403);
+      return next(err);
     } else if (review.spotId != spotId) {
-      const err = new Error("Spot couldn't be found")
-      res.status(404)
-      return next(err)
+      const err = new Error("Spot couldn't be found");
+      res.status(404);
+      return next(err);
     }
   }
   const newReview = await Review.create({
     userId: user.id,
     spotId: spotId,
     review,
-    stars
+    stars,
   });
-  res.status(201)
+  res.status(201);
 
-  res.json(newReview)
+  res.json(newReview);
 });
 
 //Get al Spots
