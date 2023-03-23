@@ -93,7 +93,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   }
   if (!isExist) {
     const err = new Error("Review couldn't be found");
-    res.status(404);
+    err.status = 404;
     return next(err);
   }
   const reviewImages = await ReviewImage.findAll({
@@ -105,7 +105,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
     const err = new Error(
       "Maximum number of images for this resource was reached"
     );
-    res.status(404);
+    err.status = 404;
     return next(err);
   }
   const newImage = await ReviewImage.create({
@@ -122,7 +122,7 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
   const updatedReview = await Review.findByPk(req.params.reviewId);
   if (!updatedReview) {
     const err = new Error("Review couldn't be found");
-    res.status(404);
+    err.status = 404;
     return next(err);
   }
   if (updatedReview.toJSON().userId == user.id) {
@@ -132,7 +132,7 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
     });
   } else {
     const err = new Error("Can edit only your reviews");
-    res.status(404);
+    err.status = 404;
     return next(err);
   }
   res.json(updatedReview);
@@ -144,7 +144,7 @@ router.delete("/:reviewId", requireAuth, async (req, res, next) => {
   const deleteReview = await Review.findByPk(req.params.reviewId);
   if (!deleteReview) {
     const err = new Error("Review couldn't be found");
-    res.status(404);
+    err.status = 404;
     return next(err);
   }
   if (deleteReview.toJSON().userId == user.id) {
