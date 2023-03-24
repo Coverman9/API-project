@@ -529,6 +529,11 @@ router.put(
       err.status = 404;
       return next(err);
     }
+    if (spot.ownerId != user.id) {
+      const err = new Error("Forbidden");
+      err.status = 403;
+      return next(err);
+    }
     await spot.update({
       address,
       city,
