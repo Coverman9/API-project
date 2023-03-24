@@ -138,7 +138,8 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
   const bookingObjects = [];
   if (userBooking.length) {
     userBooking.forEach((booking) => {
-      if (booking.toJSON().userId == user.id) {
+      console.log(booking.toJSON())
+      if (booking.toJSON().userId != user.id) {
         bookingObjects.push(booking);
       } else {
         let notOwnerSpot = {
