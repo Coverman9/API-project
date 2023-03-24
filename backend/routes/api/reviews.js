@@ -1,5 +1,6 @@
 const express = require("express");
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
+const createReviewValidation = require('../../utils/review-validation.js')
 const {
   User,
   Spot,
@@ -116,7 +117,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
 });
 
 //Edit a Review
-router.put("/:reviewId", requireAuth, async (req, res, next) => {
+router.put("/:reviewId", requireAuth, createReviewValidation, async (req, res, next) => {
   const { user } = req;
   const { review, stars } = req.body;
   const updatedReview = await Review.findByPk(req.params.reviewId);
