@@ -113,7 +113,10 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
     reviewId,
     url,
   });
-  res.json(newImage);
+  res.json({
+    id: newImage.reviewId,
+    url: newImage.url,
+  });
 });
 
 //Edit a Review
