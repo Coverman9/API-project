@@ -42,7 +42,7 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     validationErrors.startDate = "startDate cannot be before current date";
   }
   if (endDate <= startDate) {
-    validationErrors.endDate = "endDate cannot be on or before startDate";
+    validationErrors.endDate = "endDate cannot come before startDate";
   }
   if (Object.keys(validationErrors).length) {
     const err = Error("Validation Error");

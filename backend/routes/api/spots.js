@@ -68,7 +68,7 @@ router.get("/", spotQueryValidation, async (req, res) => {
         model: SpotImage,
         attributes: ["url", "preview"],
       },
-    ]
+    ],
   });
 
   const spotObjects = [];
@@ -444,8 +444,8 @@ router.get("/:spotId", async (req, res, next) => {
   });
 
   if (review) {
-    spotObject.numReviews = review.toJSON().numReviews;
-    spotObject.avgStarRating = review.toJSON().avgRating;
+    spotObject.numReviews = Number(review.toJSON().numReviews);
+    spotObject.avgStarRating = Number(review.toJSON().avgRating);
   } else {
     spotObject.numReviews = 0;
     spotObject.avgStarRating = "No Reviews exist for this spot";

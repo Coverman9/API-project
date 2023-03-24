@@ -132,7 +132,7 @@ router.put("/:reviewId", requireAuth, createReviewValidation, async (req, res, n
       stars,
     });
   } else {
-    const err = new Error("Can edit only your reviews");
+    const err = new Error("Forbidden");
     err.status = 404;
     return next(err);
   }
@@ -155,7 +155,7 @@ router.delete("/:reviewId", requireAuth, async (req, res, next) => {
       message: "Successfully deleted",
     });
   } else {
-    const err = new Error("Can't delete not yours review");
+    const err = new Error("Forbidden");
     return next(err);
   }
 });
