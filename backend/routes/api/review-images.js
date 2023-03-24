@@ -31,7 +31,7 @@ router.delete("/:imageId", requireAuth, async (req, res, next) => {
   }
   const deleteImage = image.toJSON();
   if (deleteImage.Review.ownerId != user.id) {
-    const err = new Error("Cannot delete not yours review image");
+    const err = new Error("Forbidden");
     err.status = 403;
     return next(err);
   }
