@@ -20,7 +20,7 @@ router.delete("/:imageId", requireAuth, async (req, res, next) => {
     include: [
       {
         model: Review,
-        attributes: ["ownerId"],
+        attributes: ["userId"],
       },
     ],
   });
@@ -30,7 +30,7 @@ router.delete("/:imageId", requireAuth, async (req, res, next) => {
     return next(err);
   }
   const deleteImage = image.toJSON();
-  if (deleteImage.Review.ownerId != user.id) {
+  if (deleteImage.Review.userId != user.id) {
     const err = new Error("Forbidden");
     err.status = 403;
     return next(err);
