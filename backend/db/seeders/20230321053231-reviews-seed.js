@@ -20,7 +20,7 @@ module.exports = {
    return queryInterface.bulkInsert(options, [
     {
       spotId: 1,
-      userId: 1,
+      userId: 2,
       review: 'This house was a complete disappointment. The photos made it look much nicer than it actually was.',
       stars: 3
     },
@@ -50,8 +50,8 @@ module.exports = {
     },
     {
       spotId: 5,
-      userId: 1,
-      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      userId: 3,
+      review: 'I stayed in this beautiful house for a weekend getaway and I was blown away by how comfortable and luxurious it was.',
       stars: 5
     },
     {
@@ -62,8 +62,8 @@ module.exports = {
     },
     {
       spotId: 3,
-      userId: 3,
-      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      userId: 1,
+      review: 'The furniture was old and worn, the bathroom was dirty and outdated, and there were a number of maintenance issues that were not addressed.',
       stars: 2
     },
     {
@@ -74,8 +74,8 @@ module.exports = {
     },
     {
       spotId: 1,
-      userId: 1,
-      review: 'This historic house was absolutely stunning! The architecture was breathtaking and the interior was beautifully decorated.',
+      userId: 3,
+      review: 'The house had plenty of room for all of us, with multiple bedrooms and bathrooms.',
       stars: 4
     },
    ], {})

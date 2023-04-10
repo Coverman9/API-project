@@ -1,3 +1,8 @@
 img {
     width: 400px;
 }
+
+.spots-div {
+    /* display: grid;
+    grid-template-rows: 1fr 1fr 1fr; */
+}

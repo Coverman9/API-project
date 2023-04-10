@@ -32,7 +32,7 @@ module.exports = {
     },
     {
       spotId: 3,
-      userId: 3,
+      userId: 4,
       startDate: new Date("2023-05-01"),
       endDate: new Date("2023-06-01")
     },
