@@ -23,12 +23,12 @@ const SpotsIndex = () => {
               <div className="spots-div">
                 <Link to={`/spot/${spot.id}`}>
                   <img src={spot.previewImage}></img>
+                  <div key={spot.id}>
+                    {spot.name}, {spot.city}, {spot.state}
+                  </div>
+                  <div>${spot.price} night</div>
+                  <div>⭐️ {spot.avgRating}</div>
                 </Link>
-                <div key={spot.id}>
-                  {spot.name}, {spot.city}
-                </div>
-                <div>${spot.price} night</div>
-                <div>⭐️ {spot.avgRating}</div>
               </div>
             </>
           );

@@ -13,7 +13,6 @@ const SpotIndex = () => {
   const spot = Object.values(spotObj);
   const id = useParams();
 
-  console.log(review)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,6 +26,7 @@ const SpotIndex = () => {
   return (
     <>
       {spot.map((oneSpot) => {
+        console.log("ONESPOT ==>", oneSpot)
         return (
           <>
             <h1>{oneSpot.name}</h1>
@@ -35,10 +35,11 @@ const SpotIndex = () => {
               <img src={img.url}></img>
             ))}
             <p>Address: {oneSpot.address}</p>
-            <p>City: {oneSpot.city}</p>
-            <p>Country: {oneSpot.country}</p>
-            <p>State: {oneSpot.state}</p>
+            <p>Location: {oneSpot.city},  {oneSpot.state}, {oneSpot.country}</p>
+            <h4>Hosted by: {oneSpot.Owner.firstName} {oneSpot.Owner.lastName}</h4>
+            <p>Paragraph: {oneSpot.description}</p>
             <p>Price: ${oneSpot.price}</p>
+            <button onClick={() => alert("Feature coming soon")}>Reserve</button>
             <hr/>
             <p>Reviews: {oneSpot.numReviews}</p>
             <div className="spot-reviews">

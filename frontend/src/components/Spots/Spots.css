@@ -11,6 +11,6 @@ img {
 }
 .wrapper-div {
     display: grid;
-   grid-template-columns: 33% 33% 33%;
+   grid-template-columns: 1fr 1fr 1fr;
 
 }
