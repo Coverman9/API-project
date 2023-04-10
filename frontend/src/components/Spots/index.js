@@ -19,15 +19,19 @@ const SpotsIndex = () => {
       {spots.map((spot) => {
         return (
           <>
-            <div className="spots-div">
-              <Link to={`/spot/${spot.id}`}>
-                <img src={spot.previewImage}></img>
-              </Link>
-              <p key={spot.id}>
-                {spot.name}, {spot.city}
-              </p>
-              <p>${spot.price} night</p>
-              <p>⭐️ {spot.avgRating}</p>
+            <div className="wrapper-div">
+              <div>
+                <div className="spots-div">
+                  <Link to={`/spot/${spot.id}`}>
+                    <img src={spot.previewImage}></img>
+                  </Link>
+                </div>
+                <div key={spot.id}>
+                  {spot.name}, {spot.city}
+                </div>
+                <div>${spot.price} night</div>
+                <div>⭐️ {spot.avgRating}</div>
+              </div>
             </div>
           </>
         );
