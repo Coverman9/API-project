@@ -1,0 +1,16 @@
+img {
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    box-shadow: 5px 5px 5px black;
+}
+
+.spots-div {
+
+}
+.wrapper-div {
+    display: grid;
+   grid-template-columns: 33% 33% 33%;
+
+}

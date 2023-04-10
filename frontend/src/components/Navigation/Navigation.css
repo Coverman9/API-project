@@ -1,3 +1,40 @@
 .hidden {
     display: none;
 }
+
+
+.logo-div {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.logo-div img {
+    width: 100%;
+    transition: 0.5s all ease-in-out;
+}
+
+.logo-div:hover img {
+    transform: scale(1.4);
+}
+
+
+.home-ul {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid blue
+}
+
+.profile-button {
+    display: flex;
+}
+
+.profile-button-div {
+    border: 1px solid red;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+}

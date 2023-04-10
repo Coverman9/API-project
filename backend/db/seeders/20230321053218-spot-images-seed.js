@@ -20,27 +20,28 @@ module.exports = {
    return queryInterface.bulkInsert(options, [
     {
       spotId: 1,
-      url: '../../../../../images/1.webp',
+      url: 'https://images.coolhouseplans.com/plans/44207/44207-b600.jpg',
       preview: true
     },
     {
       spotId: 2,
-      url: '../../../../../images/2.jpeg',
+      url: 'https://i.ytimg.com/vi/bBQp3mPnKSs/maxresdefault.jpg',
       preview: true
     },
     {
       spotId: 3,
-      url: '../../../../../images/3.webp',
+      url: 'https://images.adsttc.com/media/images/63c0/a935/7643/4a39/8498/948f/large_jpg/casa-tunich-apiron_13.jpg?1673570670',
       preview: true
     },
     {
       spotId: 4,
-      url: '../../../../../images/4.webp',
+      url: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_24/1448814/how-size-doesnt-make-you-happier-today-main-190614.jpg',
       preview: true
     },
     {
       spotId: 5,
-      preview: false
+      url: 'https://cdn.luxe.digital/media/20230126160156/biggest-houses-in-the-world-reviews-luxe-digital.jpg',
+      preview: true
     },
    ], {})
   },
