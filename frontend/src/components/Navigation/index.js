@@ -12,7 +12,12 @@ function Navigation({ isLoaded }) {
     <ul className="home-ul">
       <li className="home-button">
         <NavLink exact to="/">
-          Home
+          <div className="logo-div">
+            <img
+              className="main-logo"
+              src="https://as2.ftcdn.net/v2/jpg/01/20/74/39/1000_F_120743954_iv7ismy8joYb2gdDaaFrv748S0nldqvB.jpg"
+            />
+          </div>
         </NavLink>
       </li>
       {isLoaded && (

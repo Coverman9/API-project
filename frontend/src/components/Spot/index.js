@@ -2,20 +2,27 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpotDetailThunk } from "../../store/spots";
+import { getAllReviewsThunk } from "../../store/reviews";
 import "./Spot.css";
 import { Link } from "react-router-dom";
 
 const SpotIndex = () => {
   const spotObj = useSelector((state) => state.spots);
+  const reviewObj = useSelector(state => state.reviews)
+  const review = Object.values(reviewObj)
   const spot = Object.values(spotObj);
-  console.log(spot);
   const id = useParams();
+
+  console.log(review)
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSpotDetailThunk(id.spotId));
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllReviewsThunk(id.spotId))
+  }, [dispatch])
 
   return (
     <>
@@ -32,7 +39,20 @@ const SpotIndex = () => {
             <p>Country: {oneSpot.country}</p>
             <p>State: {oneSpot.state}</p>
             <p>Price: ${oneSpot.price}</p>
+            <hr/>
             <p>Reviews: {oneSpot.numReviews}</p>
+            <div className="spot-reviews">
+              {review.map(oneReview => {
+                return (
+                  <>
+                    <div>
+                      <p>{oneReview.review}</p>
+                      <p>⭐️ {oneReview.stars}</p>
+                    </div>
+                  </>
+                )
+              })}
+            </div>
           </>
         );
       })}
