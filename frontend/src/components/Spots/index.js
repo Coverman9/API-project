@@ -22,14 +22,21 @@ const SpotsIndex = () => {
             <>
               <div className="spots-div">
                 <Link to={`/spot/${spot.id}`}>
-                  {spot.previewImage !== "No Preview Image Available" ? <img src={spot.previewImage}></img> :
-                  <img src="https://ftcollinshomes.com/wp-content/uploads/2015/06/nophotoavailable.png"></img>}
+                  {spot.previewImage !== "No Preview Image Available" ? (
+                    <img src={spot.previewImage}></img>
+                  ) : (
+                    <img src="https://ftcollinshomes.com/wp-content/uploads/2015/06/nophotoavailable.png"></img>
+                  )}
+                  <div className="spot-wrapper-div">
+                    <div className="spot-info">
+                      <div key={spot.id}>
+                        {spot.name}, {spot.city}, {spot.state}
+                      </div>
+                      <div>${spot.price} night</div>
+                    </div>
 
-                  <div key={spot.id}>
-                    {spot.name}, {spot.city}, {spot.state}
+                    <div>⭐️ {spot.avgRating}</div>
                   </div>
-                  <div>${spot.price} night</div>
-                  <div>⭐️ {spot.avgRating}</div>
                 </Link>
               </div>
             </>

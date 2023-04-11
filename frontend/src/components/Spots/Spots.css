@@ -7,11 +7,19 @@
     box-shadow: 5px 5px 5px black;
 }
 
-.spots-div {
-
+.spot-wrapper-div {
+    display: flex;
+    justify-content: space-between
+}
+.spot-info {
+    display: flex;
+    flex-direction: column;
 }
 .wrapper-div {
     display: grid;
    grid-template-columns: 1fr 1fr 1fr;
+}
 
+.wrapper-div .spots-div {
+    padding:0px 30px;
 }
