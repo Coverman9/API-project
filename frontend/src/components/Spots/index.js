@@ -29,13 +29,15 @@ const SpotsIndex = () => {
                   )}
                   <div className="spot-wrapper-div">
                     <div className="spot-info">
-                      <div key={spot.id}>
+                      <div key={spot.id} className="spot-location">
                         {spot.name}, {spot.city}, {spot.state}
                       </div>
                       <div>${spot.price} night</div>
                     </div>
 
-                    <div>⭐️ {spot.avgRating}</div>
+                    <div>⭐️ {spot.avgRating !== "No Reviews exist for this spot"
+                    ? spot.avgRating
+                    : "New"}</div>
                   </div>
                 </Link>
               </div>

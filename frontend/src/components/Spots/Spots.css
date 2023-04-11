@@ -5,6 +5,13 @@
     border: 1px solid black;
     padding: 5px;
     box-shadow: 5px 5px 5px black;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.spot-location {
+    font-weight: bold;
+    color: rgb(33, 134, 222);
 }
 
 .spot-wrapper-div {
