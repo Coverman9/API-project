@@ -1,5 +1,18 @@
+.signup-div{
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
 form {
     background-color:bisque;
+    box-sizing: border-box;
+    padding: 40px;
+    border-radius: 1rem;
+    border: 4px solid hsl(0, 0%, 90%);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
 }
 
 .signup-button {

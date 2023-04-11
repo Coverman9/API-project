@@ -13,7 +13,7 @@ const SpotIndex = () => {
   const spot = Object.values(spotObj);
   const id = useParams();
 
-  console.log(review)
+  console.log("rev",review)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,21 +24,24 @@ const SpotIndex = () => {
     dispatch(getAllReviewsThunk(id.spotId))
   }, [dispatch])
 
+
   return (
     <>
       {spot.map((oneSpot) => {
+        console.log("ONESPOT ==>", oneSpot)
         return (
           <>
             <h1>{oneSpot.name}</h1>
 
-            {oneSpot.SpotImages?.map((img) => (
+            {oneSpot.SpotImages?.length ? oneSpot.SpotImages.map((img) => (
               <img src={img.url}></img>
-            ))}
+            )): <img src="https://ftcollinshomes.com/wp-content/uploads/2015/06/nophotoavailable.png"></img>}
             <p>Address: {oneSpot.address}</p>
-            <p>City: {oneSpot.city}</p>
-            <p>Country: {oneSpot.country}</p>
-            <p>State: {oneSpot.state}</p>
+            <p>Location: {oneSpot.city},  {oneSpot.state}, {oneSpot.country}</p>
+            <h4>Hosted by: {oneSpot.Owner?.firstName} {oneSpot.Owner?.lastName}</h4>
+            <p>Paragraph: {oneSpot.description}</p>
             <p>Price: ${oneSpot.price}</p>
+            <button onClick={() => alert("Feature coming soon")}>Reserve</button>
             <hr/>
             <p>Reviews: {oneSpot.numReviews}</p>
             <div className="spot-reviews">

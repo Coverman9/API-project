@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const SpotsIndex = () => {
   const spotsObj = useSelector((state) => state.spots);
   const spots = Object.values(spotsObj);
-  console.log(spots);
+  console.log("image check", spots);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSpotsThunk());
@@ -22,13 +22,24 @@ const SpotsIndex = () => {
             <>
               <div className="spots-div">
                 <Link to={`/spot/${spot.id}`}>
-                  <img src={spot.previewImage}></img>
+                  {spot.previewImage !== "No Preview Image Available" ? (
+                    <img src={spot.previewImage}></img>
+                  ) : (
+                    <img src="https://ftcollinshomes.com/wp-content/uploads/2015/06/nophotoavailable.png"></img>
+                  )}
+                  <div className="spot-wrapper-div">
+                    <div className="spot-info">
+                      <div key={spot.id} className="spot-location">
+                        {spot.name}, {spot.city}, {spot.state}
+                      </div>
+                      <div>${spot.price} night</div>
+                    </div>
+
+                    <div>⭐️ {spot.avgRating !== "No Reviews exist for this spot"
+                    ? spot.avgRating
+                    : "New"}</div>
+                  </div>
                 </Link>
-                <div key={spot.id}>
-                  {spot.name}, {spot.city}
-                </div>
-                <div>${spot.price} night</div>
-                <div>⭐️ {spot.avgRating}</div>
               </div>
             </>
           );

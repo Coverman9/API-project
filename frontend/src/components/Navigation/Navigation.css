@@ -2,29 +2,37 @@
     display: none;
 }
 
-
 .logo-div {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
 }
+.main-logo {
+    width: 150px;
 
-.logo-div img {
-    width: 100%;
-    transition: 0.5s all ease-in-out;
 }
-
-.logo-div:hover img {
-    transform: scale(1.4);
+.airdnd-span {
+    font-size: 30px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(73, 126, 233);
 }
-
 
 .home-ul {
     display: flex;
     justify-content: space-between;
-    border: 1px solid blue
+
+
 }
+a:link { text-decoration: none; }
+
+
+a:visited { text-decoration: none; }
+
+
+a:hover { text-decoration: none; }
+
+
+a:active { text-decoration: none; }
 
 .profile-button {
     display: flex;

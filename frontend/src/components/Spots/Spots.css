@@ -1,16 +1,32 @@
-img {
-    width: 300px;
+.spots-div img {
+    width: 350px;
+    height: 200px;
     border-radius: 10px;
     border: 1px solid black;
     padding: 5px;
     box-shadow: 5px 5px 5px black;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
-.spots-div {
+.spot-location {
+    font-weight: bold;
+    color: rgb(33, 134, 222);
+}
 
+.spot-wrapper-div {
+    display: flex;
+    justify-content: space-between
+}
+.spot-info {
+    display: flex;
+    flex-direction: column;
 }
 .wrapper-div {
     display: grid;
-   grid-template-columns: 33% 33% 33%;
+   grid-template-columns: 1fr 1fr 1fr;
+}
 
+.wrapper-div .spots-div {
+    padding:0px 30px;
 }
