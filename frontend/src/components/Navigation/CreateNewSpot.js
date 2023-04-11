@@ -16,7 +16,7 @@ function CreateNewSpot({ user }) {
   const [image, setImage] = useState([]);
   const [price, setPrice] = useState(0);
   const [errors, setErrors] = useState({});
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

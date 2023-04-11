@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import OpenModalMenuItem from './OpenModalMenuItem';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+import { useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import { Link } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function ProfileButton({ user }) {
       }
     };
 
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
@@ -42,15 +43,20 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu} className="profile-button">
-      ≡ <i className="fas fa-user-circle" />
+        ≡ <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>Hello {user.firstName} {user.lastName}!</li>
-            <li>email: {user.email}</li>
             <li>
-              <button onClick={logout}>Log Out</button>
+              Hello {user.firstName} {user.lastName}!
+            </li>
+            <li>email: {user.email}</li>
+            <hr />
+            <li><Link to={"/spots/current"}>Manage Spots</Link></li>
+            <hr />
+            <li>
+              <button className="logout-button" onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (

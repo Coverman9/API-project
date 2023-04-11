@@ -1,21 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSpotsThunk } from "../../store/spots";
-import "./Spots.css";
+import { getCurrentSpotsThunk } from "../../store/spots";
 import { Link } from "react-router-dom";
 
-const SpotsIndex = () => {
+import "./Userspots.css";
+
+const UserSpots = () => {
   const spotsObj = useSelector((state) => state.spots);
   const spots = Object.values(spotsObj);
-  //console.log("image check", spots);
+
+  // console.log("currentsspots", spotsObj)
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllSpotsThunk());
+    dispatch(getCurrentSpotsThunk());
   }, [dispatch]);
 
   return (
     <>
-      <h1>All spots</h1>
+      <h1>Manage Your Spots</h1>
       <div className="wrapper-div">
         {spots.map((spot) => {
           return (
@@ -52,4 +55,4 @@ const SpotsIndex = () => {
   );
 };
 
-export default SpotsIndex;
+export default UserSpots;

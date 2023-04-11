@@ -29,7 +29,7 @@ function Navigation({ isLoaded }) {
           <div className="profile-button-div">
             <ProfileButton user={sessionUser} />
           </div>
-          <div>
+          <div className="create-new-spot-button">
             {sessionUser && (
               <OpenModalMenuItem
                 itemText="Create a New Spot"

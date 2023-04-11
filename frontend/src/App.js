@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SpotsIndex from "./components/Spots";
 import SpotIndex from "./components/Spot";
+import UserSpots from "./components/Userspots";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path={"/spot/:spotId"}>
             <SpotIndex />
+          </Route>
+          <Route exact path={"/spots/current"}>
+            <UserSpots />
           </Route>
           <Route>Page Not found</Route>
         </Switch>

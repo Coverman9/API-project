@@ -43,7 +43,7 @@ const SpotIndex = () => {
   return (
     <>
       {spot.map((oneSpot) => {
-        console.log("ONESPOT ==>", oneSpot);
+        //console.log("ONESPOT ==>", oneSpot);
         return (
           <>
             <h1>{oneSpot.name}</h1>
@@ -81,7 +81,8 @@ const SpotIndex = () => {
               </div>
             </div>
             <hr />
-            <p>⭐️ {oneSpot.avgStarRating}</p>
+
+            <p>★ {oneSpot.avgStarRating}</p>
             <p>Reviews: {oneSpot.numReviews}</p>
             <div className="spot-reviews">
               {review.map((oneReview) => {
