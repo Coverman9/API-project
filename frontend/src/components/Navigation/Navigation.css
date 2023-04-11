@@ -10,6 +10,12 @@
     width: 150px;
 
 }
+.profile-button {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 20px;
+
+}
 .airdnd-span {
     font-size: 30px;
     text-decoration: none;
@@ -34,12 +40,9 @@ a:hover { text-decoration: none; }
 
 a:active { text-decoration: none; }
 
-.profile-button {
-    display: flex;
-}
-
 .profile-button-div {
-    border: 1px solid red;
+    display: flex;
+    justify-content: flex-end;
 }
 
 li {

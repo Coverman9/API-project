@@ -30,3 +30,16 @@
 .wrapper-div .spots-div {
     padding:0px 30px;
 }
+
+
+/* @media screen and (max-width: 1250px){
+    .wrapper-div {
+        grid-template-columns: 1fr 1fr;
+    }
+} */
+
+@media screen and (max-width: 850px){
+    .wrapper-div {
+        grid-template-columns: 1fr;
+    }
+}
