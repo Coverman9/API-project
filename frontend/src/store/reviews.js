@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 export const LOAD_REVIEWS = "reviews/LOAD_REVIEWS";
 export const LOAD_REVIEW_DETAIL = "reviews/LOAD_REVIEW_DETAIL"
 
@@ -12,7 +14,7 @@ export const loadReviewsAction = (reviews) => ({
 // })
 
 export const getAllReviewsThunk = (spotId) => async (dispatch) => {
-  const res = await fetch(`/api/spots/${spotId}/reviews`);
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
   const reviews = await res.json();
   await dispatch(loadReviewsAction(reviews.Reviews));
 };

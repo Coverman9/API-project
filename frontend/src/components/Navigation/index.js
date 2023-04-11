@@ -3,11 +3,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import CreateNewSpot from "./CreateNewSpot";
+import OpenModalMenuItem from "./OpenModalMenuItem";
 import "./Navigation.css";
+import logo from "./moelogo.png"
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-
+  // console.log("sessionUser =>",sessionUser)
   return (
     <ul className="home-ul">
       <li className="home-button">
@@ -15,8 +18,9 @@ function Navigation({ isLoaded }) {
           <div className="logo-div">
             <img
               className="main-logo"
-              src="https://as2.ftcdn.net/v2/jpg/01/20/74/39/1000_F_120743954_iv7ismy8joYb2gdDaaFrv748S0nldqvB.jpg"
+              src={logo}
             />
+            <span className="airdnd-span">airdnd</span>
           </div>
         </NavLink>
       </li>
@@ -24,6 +28,14 @@ function Navigation({ isLoaded }) {
         <li className="profile-button">
           <div className="profile-button-div">
             <ProfileButton user={sessionUser} />
+          </div>
+          <div>
+            {sessionUser && (
+              <OpenModalMenuItem
+                itemText="Create a New Spot"
+                modalComponent={<CreateNewSpot user={sessionUser} />}
+              />
+            )}
           </div>
         </li>
       )}
