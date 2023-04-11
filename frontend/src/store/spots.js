@@ -1,9 +1,11 @@
 import { csrfFetch } from "./csrf";
 
 export const LOAD_SPOTS = "spots/LOAD_SPOTS";
-export const LOAD_SPOT_DETAIL = "spots/LOAD_SPOT_DETAIL"
-export const CREATE_NEW_SPOT = "spots/CREATE_NEW_SPOT"
-export const CURRENT_SPOTS = "spots/CURRENT_SPOTS"
+export const LOAD_SPOT_DETAIL = "spots/LOAD_SPOT_DETAIL";
+export const CREATE_NEW_SPOT = "spots/CREATE_NEW_SPOT";
+export const CREATE_IMAGE_SPOT = "spots/CREATE_IMAGE_SPOT";
+export const CURRENT_SPOTS = "spots/CURRENT_SPOTS";
+export const DELETE_SPOT = "spots/DELETE_SPOT";
 
 export const loadSpotsAction = (spots) => ({
   type: LOAD_SPOTS,
@@ -12,18 +14,28 @@ export const loadSpotsAction = (spots) => ({
 
 export const loadSpotDetailAction = (spot) => ({
   type: LOAD_SPOT_DETAIL,
-  spot
-})
+  spot,
+});
 
 export const createNewSpotAction = (spot) => ({
   type: CREATE_NEW_SPOT,
-  spot
-})
+  spot,
+});
+
+export const createNewImageAction = (spotId) => ({
+  type: CREATE_IMAGE_SPOT,
+  spotId,
+});
 
 export const loadCurrentSpotsAction = (spots) => ({
   type: CURRENT_SPOTS,
-  spots
-})
+  spots,
+});
+
+export const deleteSpotAction = (spotId) => ({
+  type: DELETE_SPOT,
+  spotId,
+});
 
 export const getAllSpotsThunk = () => async (dispatch) => {
   const res = await csrfFetch("/api/spots");
@@ -32,35 +44,78 @@ export const getAllSpotsThunk = () => async (dispatch) => {
 };
 
 export const getSpotDetailThunk = (spotId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/spots/${spotId}`)
-  const spot = await res.json()
-  await dispatch(loadSpotDetailAction(spot))
-}
+  const res = await csrfFetch(`/api/spots/${spotId}`);
+  const spot = await res.json();
+  await dispatch(loadSpotDetailAction(spot));
+};
 
 export const getCurrentSpotsThunk = () => async (dispatch) => {
-  const res = await csrfFetch("/api/spots/current")
-  const spots = await res.json()
-  await dispatch (loadCurrentSpotsAction(spots.Spots))
-}
+  const res = await csrfFetch("/api/spots/current");
+  const spots = await res.json();
+  await dispatch(loadCurrentSpotsAction(spots.Spots));
+};
 
-export const createNewSpotThunk = (spot) => async (dispatch) => {
-  const res = await csrfFetch("/api/spots", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(spot)
-  })
-  console.log(res)
-  if(res.ok) {
-    const newSpot = await res.json()
-    dispatch(createNewSpotAction(newSpot))
-    return newSpot
+export const createNewSpotThunk =
+  ({
+    country,
+    address,
+    city,
+    state,
+    lat,
+    lng,
+    description,
+    name,
+    price,
+    image,
+  }) =>
+  async (dispatch) => {
+    const res = await csrfFetch("/api/spots", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country,
+        address,
+        city,
+        state,
+        lat,
+        lng,
+        description,
+        name,
+        price,
+      }),
+    });
+    const newSpot = await res.json();
+    const res2 = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: image, preview: true }),
+    });
+    if (res2.ok) {
+      dispatch(createNewSpotAction(newSpot));
+      // history.push(`/spot/${id}`)
+      return newSpot;
+    } else {
+      const errors = await res.json();
+      return errors;
+    }
+  };
+
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteSpotAction(spotId));
   } else {
-    const errors = await res.json()
-    return errors
+    const errors = await res.json();
+    return errors;
   }
-}
+};
 
 const initialState = {};
 
@@ -71,15 +126,19 @@ const spotsReducer = (state = initialState, action) => {
       action.spots.forEach((spot) => (newState[spot.id] = spot));
       return newState;
     case LOAD_SPOT_DETAIL:
-      newState[action.spot.id] = action.spot
-      return newState
+      newState[action.spot.id] = action.spot;
+      return newState;
     case CREATE_NEW_SPOT:
-      newState = {...state}
-      newState[action.spot.id] = action.spot
-      return newState
+      newState = { ...state };
+      newState[action.spot.id] = action.spot;
+      return newState;
     case CURRENT_SPOTS:
-      action.spots.forEach((spot) => (newState[spot.id] = spot))
-      return newState
+      action.spots.forEach((spot) => (newState[spot.id] = spot));
+      return newState;
+    case DELETE_SPOT:
+      newState = { ...state };
+      delete newState[action.spotId];
+      return newState;
     default:
       return state;
   }

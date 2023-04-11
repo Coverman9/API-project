@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createNewSpotThunk } from "../../store/spots";
+import { useHistory } from "react-router-dom";
 
 function CreateNewSpot({ user }) {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -17,10 +18,10 @@ function CreateNewSpot({ user }) {
   const [price, setPrice] = useState(0);
   const [errors, setErrors] = useState({});
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(createNewSpotThunk({
+    const newSpot = await dispatch(
+      createNewSpotThunk({
         country,
         address,
         city,
@@ -29,9 +30,11 @@ function CreateNewSpot({ user }) {
         lng,
         description,
         name,
-        price
-    }));
-
+        price,
+        image,
+      })
+    );
+    history.push(`/spot/${newSpot.id}`);
   };
 
   return (

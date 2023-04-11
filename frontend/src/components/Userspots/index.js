@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentSpotsThunk } from "../../store/spots";
 import { Link } from "react-router-dom";
+import { deleteSpotThunk } from "../../store/spots";
 
 import "./Userspots.css";
 
@@ -15,6 +16,11 @@ const UserSpots = () => {
   useEffect(() => {
     dispatch(getCurrentSpotsThunk());
   }, [dispatch]);
+
+  const deleteSpot = (e, spotId) => {
+    e.preventDefault();
+    dispatch(deleteSpotThunk(spotId))
+  };
 
   return (
     <>
@@ -46,6 +52,8 @@ const UserSpots = () => {
                     </div>
                   </div>
                 </Link>
+                <button>Update</button>
+                <button onClick={(e) => deleteSpot(e, spot.id)}>Delete</button>
               </div>
             </>
           );
