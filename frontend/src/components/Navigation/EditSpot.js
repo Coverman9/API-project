@@ -8,12 +8,12 @@ const EditSpot = () => {
   const { spotId } = useParams();
   const spots = useSelector((state) => state.spots);
   const id = parseInt(spotId)
-  console.log("edit", spots);
+  const spotRess = spots[spotId]
+
   const dispatch = useDispatch();
   const history = useHistory();
 
-  
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState(spotRess?.country || "");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -176,7 +176,7 @@ const EditSpot = () => {
               onChange={(e) => setImage(e.target.value)}
             /> */}
         </label>
-        <button type="submit">Create Spot</button>
+        <button type="submit">Update Spot</button>
       </form>
     </>
   );
