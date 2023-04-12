@@ -14,15 +14,15 @@ const EditSpot = () => {
   const history = useHistory();
 
   const [country, setCountry] = useState(spotRess?.country || "");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [lat, setLatitude] = useState(0);
-  const [lng, setLongitude] = useState(0);
-  const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
+  const [address, setAddress] = useState(spotRess?.address || "");
+  const [city, setCity] = useState(spotRess?.city || "");
+  const [state, setState] = useState(spotRess?.state || "");
+  const [lat, setLatitude] = useState(spotRess?.lat ||  0);
+  const [lng, setLongitude] = useState(spotRess?.lng || 0);
+  const [description, setDescription] = useState(spotRess?.description || "");
+  const [name, setName] = useState(spotRess?.name || "");
   const [image, setImage] = useState([]);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(spotRess?.price || 0);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
