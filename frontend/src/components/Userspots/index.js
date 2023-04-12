@@ -19,7 +19,7 @@ const UserSpots = () => {
 
   const deleteSpot = (e, spotId) => {
     e.preventDefault();
-    dispatch(deleteSpotThunk(spotId))
+    dispatch(deleteSpotThunk(spotId));
   };
 
   return (
@@ -52,7 +52,9 @@ const UserSpots = () => {
                     </div>
                   </div>
                 </Link>
-                <button>Update</button>
+                <Link to={`/spots/${spot.id}/edit`}>
+                  <button>Update</button>
+                </Link>
                 <button onClick={(e) => deleteSpot(e, spot.id)}>Delete</button>
               </div>
             </>

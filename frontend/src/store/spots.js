@@ -6,6 +6,7 @@ export const CREATE_NEW_SPOT = "spots/CREATE_NEW_SPOT";
 export const CREATE_IMAGE_SPOT = "spots/CREATE_IMAGE_SPOT";
 export const CURRENT_SPOTS = "spots/CURRENT_SPOTS";
 export const DELETE_SPOT = "spots/DELETE_SPOT";
+export const UPDATE_SPOT = "spots/UPDATE_SPOT";
 
 export const loadSpotsAction = (spots) => ({
   type: LOAD_SPOTS,
@@ -37,6 +38,12 @@ export const deleteSpotAction = (spotId) => ({
   spotId,
 });
 
+export const editSpotAction = (spots) => ({
+  type: UPDATE_SPOT,
+  spots,
+});
+
+////--------------------------------------------------------------------
 export const getAllSpotsThunk = () => async (dispatch) => {
   const res = await csrfFetch("/api/spots");
   const spots = await res.json();
@@ -54,6 +61,36 @@ export const getCurrentSpotsThunk = () => async (dispatch) => {
   const spots = await res.json();
   await dispatch(loadCurrentSpotsAction(spots.Spots));
 };
+
+export const updateSpotThunk =
+  ({ country, address, city, state, lat, lng, description, name, price, spotId }) =>
+  async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country,
+        address,
+        city,
+        state,
+        lat,
+        lng,
+        description,
+        name,
+        price,
+      }),
+    });
+    if (res.ok) {
+      const updatedSpot = await res.json();
+      dispatch(editSpotAction(updatedSpot));
+      return updatedSpot;
+    } else {
+      const errors = await res.json();
+      return errors;
+    }
+  };
 
 export const createNewSpotThunk =
   ({
@@ -139,6 +176,8 @@ const spotsReducer = (state = initialState, action) => {
       newState = { ...state };
       delete newState[action.spotId];
       return newState;
+    case UPDATE_SPOT:
+      return { ...state, [action.spots.id]: action.spots };
     default:
       return state;
   }
