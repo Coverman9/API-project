@@ -7,9 +7,10 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import "./Spot.css";
 import { Link } from "react-router-dom";
 import PostReviewModal from "../Modals/PostReviewModal";
+import {deleteReviewThunk} from "../../store/reviews"
 
 const SpotIndex = () => {
-  const sessionUser = useSelector((state) => state.session.user)
+  const sessionUser = useSelector((state) => state.session.user);
   const spotObj = useSelector((state) => state.spots);
   const reviewObj = useSelector((state) => state.reviews);
   const review = Object.values(reviewObj);
@@ -27,6 +28,10 @@ const SpotIndex = () => {
     dispatch(getAllReviewsThunk(id.spotId));
   }, [dispatch]);
 
+  const deleteReview = (e, reviewId) => {
+    e.preventDefault()
+    dispatch(deleteReviewThunk(reviewId))
+  }
   const month = [
     0,
     "January",
@@ -90,6 +95,7 @@ const SpotIndex = () => {
                 <p>Reviews: {oneSpot.numReviews}</p>
                 <div className="spot-reviews">
                   {review.map((oneReview) => {
+                    //console.log("ONEREVIE ==>", oneReview)
                     const reviewMonth = oneReview.createdAt.split("")[6];
                     const year = oneReview.createdAt.split("-")[0];
                     return (
@@ -101,6 +107,11 @@ const SpotIndex = () => {
                           </p>
                           <p>{oneReview.review}</p>
                           <p>⭐️ {oneReview.stars}</p>
+                          {sessionUser.id === oneReview.User.id && (
+                            <>
+                              <button onClick={(e) => deleteReview(e, oneReview.id)}>Delete</button>
+                            </>
+                          )}
                         </div>
                       </>
                     );
@@ -109,11 +120,15 @@ const SpotIndex = () => {
               </>
             ) : (
               <>
-              <h3>★ New</h3>
-              {sessionUser && (<OpenModalMenuItem
-              itemText="Post Your Review"
-              modalComponent={<PostReviewModal spotId = {oneSpot.id}/>} />
-              )}</>
+                <h3>★ New</h3>
+                {sessionUser.id !== oneSpot.ownerId && sessionUser && (
+                  <OpenModalMenuItem
+                    itemText="Post Your Review"
+                    modalComponent={<PostReviewModal spotId={oneSpot.id} />}
+                  />
+                )}
+                <h4>Be the first to post a review!</h4>
+              </>
             )}
           </>
         );

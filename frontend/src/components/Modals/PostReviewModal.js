@@ -11,7 +11,7 @@ const PostReviewModal = ({ spotId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("submiting")
     await dispatch(
       createReviewThunk({
         spotId,
@@ -68,7 +68,7 @@ const PostReviewModal = ({ spotId }) => {
           <span className="stars-text">Stars</span>
         </div>
         <div className="submit-review-div">
-          <button onSubmit={handleSubmit} className="submit-review-button">
+          <button onClick={handleSubmit} className="submit-review-button">
             Submit Your Review
           </button>
         </div>
