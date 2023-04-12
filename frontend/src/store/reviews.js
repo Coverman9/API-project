@@ -4,6 +4,7 @@ export const LOAD_REVIEWS = "reviews/LOAD_REVIEWS";
 export const LOAD_REVIEW_DETAIL = "reviews/LOAD_REVIEW_DETAIL";
 export const CREATE_REVIEW = "reviews/CREARE_REVIEW";
 export const DELETE_REVIEW = "reviews/DELETE_REVIEW";
+export const CURRENT_USER_REVIEWS = "reviews/CURRENT_USER_REVIEWS";
 
 export const loadReviewsAction = (reviews) => ({
   type: LOAD_REVIEWS,
@@ -18,6 +19,11 @@ export const createReviewAction = (review) => ({
 export const deleteReviewAction = (review) => ({
   type: DELETE_REVIEW,
   review,
+});
+
+export const loadCurrentUserReviewsAction = (reviews) => ({
+  type: CURRENT_USER_REVIEWS,
+  reviews,
 });
 
 // export const loadReviewDetailAction = (spot) => ({
@@ -64,6 +70,12 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
   }
 };
 
+export const getCurrentUserReviewsThunk = () => async (dispatch) => {
+  const res = await csrfFetch("/api/reviews/current");
+  const reviews = await res.json();
+  await dispatch(loadCurrentUserReviewsAction(reviews.Reviews));
+};
+
 // export const getReviewDetailThunk = (spotId) => async (dispatch) => {
 //   const res = await fetch(`/api/spots/${spotId}`)
 //   const spot = await res.json()
@@ -85,6 +97,9 @@ const reviewsReducer = (state = initialState, action) => {
     case DELETE_REVIEW:
       newState = { ...state };
       delete newState[action.reviewId];
+      return newState;
+    case CURRENT_USER_REVIEWS:
+      action.reviews.forEach((review) => (newState[review.id] = review));
       return newState;
     default:
       return state;

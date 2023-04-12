@@ -56,6 +56,10 @@ function ProfileButton({ user }) {
             <li onClick={closeMenu}>
               <Link to={"/spots/current"}>Manage Spots</Link>
             </li>
+            <hr/>
+            <li onClick={closeMenu}>
+              <Link to={"/reviews/current"}>Manage Reviews</Link>
+            </li>
             <hr />
             <li>
               <button className="logout-button" onClick={logout}>
