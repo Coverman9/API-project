@@ -1,0 +1,15 @@
+.update-delete-buttons {
+    display: flex;
+    margin-top: 5px;
+}
+.delete-spot-button {
+    margin-left: 10px;
+}
+
+.updel {
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: cornflowerblue;
+    color: white;
+}

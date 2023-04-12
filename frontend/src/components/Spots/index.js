@@ -35,8 +35,8 @@ const SpotsIndex = () => {
                       <div>${spot.price} night</div>
                     </div>
 
-                    <div>
-                      ⭐️{" "}
+                    <div className="spots-review-star">
+                      ⭐️
                       {spot.avgRating !== "No Reviews exist for this spot"
                         ? spot.avgRating
                         : "New"}

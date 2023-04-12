@@ -2,7 +2,7 @@
     width: 350px;
     height: 200px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 5px;
     box-shadow: 5px 5px 5px black;
     margin-bottom: 5px;
@@ -29,6 +29,11 @@
 
 .wrapper-div .spots-div {
     padding:0px 30px;
+}
+
+.spots-review-star {
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif
 }
 
 
