@@ -1,0 +1,33 @@
+.spot-detail-images {
+    width: 500px;
+}
+
+
+.wrapper-info-reserve {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.reserve-button-div {
+    border: 2px solid black;
+    border-radius: 10px;
+
+}
+
+.reserve-button {
+
+    padding: 10px 100px;
+    background-color: cornflowerblue;
+    color: white;
+    box-shadow: 2px 2px 5px black;
+    margin: 10px;
+}
+
+.price-div {
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    font-weight: bold;
+}

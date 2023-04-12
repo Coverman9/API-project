@@ -1,21 +1,30 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSpotsThunk } from "../../store/spots";
-import "./Spots.css";
+import { getCurrentSpotsThunk } from "../../store/spots";
 import { Link } from "react-router-dom";
+import { deleteSpotThunk } from "../../store/spots";
 
-const SpotsIndex = () => {
+import "./Userspots.css";
+
+const UserSpots = () => {
   const spotsObj = useSelector((state) => state.spots);
   const spots = Object.values(spotsObj);
-  //console.log("image check", spots);
+
+  // console.log("currentsspots", spotsObj)
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllSpotsThunk());
+    dispatch(getCurrentSpotsThunk());
   }, [dispatch]);
+
+  const deleteSpot = (e, spotId) => {
+    e.preventDefault();
+    dispatch(deleteSpotThunk(spotId));
+  };
 
   return (
     <>
-      <h1>All spots</h1>
+      <h1>Manage Your Spots</h1>
       <div className="wrapper-div">
         {spots.map((spot) => {
           return (
@@ -43,6 +52,10 @@ const SpotsIndex = () => {
                     </div>
                   </div>
                 </Link>
+                <Link to={`/spots/${spot.id}/edit`}>
+                  <button>Update</button>
+                </Link>
+                <button onClick={(e) => deleteSpot(e, spot.id)}>Delete</button>
               </div>
             </>
           );
@@ -52,4 +65,4 @@ const SpotsIndex = () => {
   );
 };
 
-export default SpotsIndex;
+export default UserSpots;

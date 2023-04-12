@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/index.js
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import CreateNewSpot from "./CreateNewSpot";
@@ -25,16 +25,15 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </li>
       {isLoaded && (
-        <li className="profile-button">
+        <li className="profile-button-li">
           <div className="profile-button-div">
             <ProfileButton user={sessionUser} />
           </div>
-          <div>
+          <div className="create-new-spot-button">
             {sessionUser && (
-              <OpenModalMenuItem
-                itemText="Create a New Spot"
-                modalComponent={<CreateNewSpot user={sessionUser} />}
-              />
+              <Link to={"/spots/new"}>
+                <div>Create a New Spot</div>
+              </Link>
             )}
           </div>
         </li>
