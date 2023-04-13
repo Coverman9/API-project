@@ -15,17 +15,17 @@ const SpotIndex = () => {
   const reviewObj = useSelector((state) => state.reviews);
   const review = Object.values(reviewObj);
   const spot = Object.values(spotObj);
-  const id = useParams();
+  const {spotId} = useParams();
 
   //console.log("rev", review);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getSpotDetailThunk(id.spotId));
+    dispatch(getSpotDetailThunk(spotId));
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getAllReviewsThunk(id.spotId));
+    dispatch(getAllReviewsThunk(spotId));
   }, [dispatch]);
 
   const deleteReview = (e, reviewId) => {
@@ -109,7 +109,7 @@ const SpotIndex = () => {
                           <p>⭐️ {oneReview.stars}</p>
                           {sessionUser.id === oneReview.User.id && (
                             <>
-                              <button onClick={(e) => deleteReview(e, oneReview.id)}>Delete</button>
+                              <button className="delete-review-in-spot" onClick={(e) => deleteReview(e, oneReview.id)}>Delete</button>
                             </>
                           )}
                         </div>
@@ -125,6 +125,7 @@ const SpotIndex = () => {
                   <OpenModalMenuItem
                     itemText="Post Your Review"
                     modalComponent={<PostReviewModal spotId={oneSpot.id} />}
+                    buttonClassName="modal-component"
                   />
                 )}
                 <h4>Be the first to post a review!</h4>

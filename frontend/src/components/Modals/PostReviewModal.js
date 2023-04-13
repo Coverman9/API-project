@@ -6,7 +6,8 @@ import { createReviewThunk } from "../../store/reviews";
 const PostReviewModal = ({ spotId }) => {
   const dispatch = useDispatch();
 
-  const [stars, setStars] = useState(4);
+  const [stars, setStars] = useState(0);
+  const [reviewStar, setReviewStar] = useState(0)
   const [review, setReview] = useState("");
 
   const handleSubmit = async (e) => {
@@ -24,8 +25,6 @@ const PostReviewModal = ({ spotId }) => {
     <>
       <div className="create-review-main-div">
         <h1>How was your stay?★</h1>
-        <h2>{stars}</h2>
-
         <textarea
           placeholder="Leave your review here"
           rows="10"
@@ -35,37 +34,41 @@ const PostReviewModal = ({ spotId }) => {
         ></textarea>
         <div className="rating-div">
           <div
-            onMouseEnter={() => setStars(1)}
-            onMouseLeave={() => setStars(0)}
+            onMouseEnter={() => setReviewStar(1)}
+            onMouseLeave={() => setReviewStar(0)}
+            onClick={() => setStars(1)}
           >
-            {stars <= 0 ? <span>☆</span> : <span>★</span>}
+            {reviewStar <= 0 ? <span>☆</span> : <span>★</span>}
           </div>
           <div
-            onMouseEnter={() => setStars(2)}
-            onMouseLeave={() => setStars(0)}
+            onMouseEnter={() => setReviewStar(2)}
+            onMouseLeave={() => setReviewStar(0)}
+            onClick={() => setStars(2)}
           >
-            {stars <= 1 ? <span>☆</span> : <span>★</span>}
+            {reviewStar <= 1 ? <span>☆</span> : <span>★</span>}
           </div>
           <div
-            onMouseEnter={() => setStars(3)}
-            onMouseLeave={() => setStars(0)}
+            onMouseEnter={() => setReviewStar(3)}
+            onMouseLeave={() => setReviewStar(0)}
+            onClick={() => setStars(3)}
           >
-            {stars <= 2 ? <span>☆</span> : <span>★</span>}
+            {reviewStar <= 2 ? <span>☆</span> : <span>★</span>}
           </div>
           <div
-            onMouseEnter={() => setStars(4)}
-            onMouseLeave={() => setStars(0)}
+            onMouseEnter={() => setReviewStar(4)}
+            onMouseLeave={() => setReviewStar(0)}
+            onClick={() => setStars(4)}
           >
-            {stars <= 3 ? <span>☆</span> : <span>★</span>}
+            {reviewStar <= 3 ? <span>☆</span> : <span>★</span>}
           </div>
           <div
-            onMouseEnter={() => setStars(5)}
-            onMouseLeave={() => setStars(0)}
+            onMouseEnter={() => setReviewStar(5)}
+            onMouseLeave={() => setReviewStar(0)}
             onClick={() => setStars(5)}
           >
-            {stars <= 4 ? <span>☆</span> : <span>★</span>}
+            {reviewStar <= 4 ? <span>☆</span> : <span>★</span>}
           </div>
-          <span className="stars-text">Stars</span>
+          <span className="stars-text">Stars {stars}</span>
         </div>
         <div className="submit-review-div">
           <button onClick={handleSubmit} className="submit-review-button">

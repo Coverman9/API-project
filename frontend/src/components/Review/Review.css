@@ -1,0 +1,14 @@
+.review-block {
+    border: 2px dashed black;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.delete-review-button {
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: cornflowerblue;
+    color: white;
+}

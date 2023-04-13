@@ -27,10 +27,10 @@ function Navigation({ isLoaded }) {
             <div className="profile-button-div">
               <ProfileButton user={sessionUser} />
             </div>
-            <div className="create-new-spot-button">
+            <div >
               {sessionUser && (
                 <Link to={"/spots/new"}>
-                  <div>Create a New Spot</div>
+                  <div className="create-new-spot-button">Create a New Spot</div>
                 </Link>
               )}
             </div>

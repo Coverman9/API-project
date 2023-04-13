@@ -31,3 +31,11 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.delete-review-in-spot {
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: cornflowerblue;
+    color: white;
+}

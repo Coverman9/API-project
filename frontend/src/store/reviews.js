@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 export const LOAD_REVIEWS = "reviews/LOAD_REVIEWS";
 export const LOAD_REVIEW_DETAIL = "reviews/LOAD_REVIEW_DETAIL";
-export const CREATE_REVIEW = "reviews/CREARE_REVIEW";
+export const CREATE_REVIEW = "reviews/CREATE_REVIEW";
 export const DELETE_REVIEW = "reviews/DELETE_REVIEW";
 export const CURRENT_USER_REVIEWS = "reviews/CURRENT_USER_REVIEWS";
 
@@ -96,7 +96,7 @@ const reviewsReducer = (state = initialState, action) => {
       return newState;
     case DELETE_REVIEW:
       newState = { ...state };
-      delete newState[action.reviewId];
+      delete newState[action.review];
       return newState;
     case CURRENT_USER_REVIEWS:
       action.reviews.forEach((review) => (newState[review.id] = review));
