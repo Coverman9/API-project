@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentSpotsThunk } from "../../store/spots";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import "./Userspots.css";
 const UserSpots = () => {
   const spotsObj = useSelector((state) => state.spots);
   const spots = Object.values(spotsObj);
+  const [showDeleteMenu, setShowDeleteMenu] = useState(false)
 
   // console.log("currentsspots", spotsObj)
 
@@ -52,10 +53,17 @@ const UserSpots = () => {
                     </div>
                   </div>
                 </Link>
-                <Link to={`/spots/${spot.id}/edit`}>
-                  <button>Update</button>
-                </Link>
-                <button onClick={(e) => deleteSpot(e, spot.id)}>Delete</button>
+                <div className="update-delete-buttons">
+                  <Link to={`/spots/${spot.id}/edit`}>
+                    <button className="updel edit-spot-button">Update</button>
+                  </Link>
+                  <button
+                    className="updel delete-spot-button"
+                    onClick={(e) => deleteSpot(e, spot.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </>
           );

@@ -42,7 +42,6 @@ function CreateNewSpot({ user }) {
       <h1>Creat a New Spot</h1>
       <form
         onSubmit={handleSubmit}
-
       >
         <h4>Where's your place located?</h4>
         <caption>

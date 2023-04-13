@@ -2,6 +2,11 @@
     display: none;
 }
 
+.create-and-profile-div {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
 .profile-dropdown {
     border: 2px solid black;
     background-color: rgb(251, 251, 251);
@@ -10,6 +15,7 @@
     position: absolute;
     top: 60px;
     padding: 20px;
+    cursor: pointer;
 }
 
 .logo-div {
@@ -24,13 +30,13 @@
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 20px;
-
+    cursor: pointer;
 }
 .airdnd-span {
     font-size: 30px;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-    color: rgb(73, 126, 233);
+    color: cornflowerblue
 }
 
 .home-ul {
@@ -61,11 +67,19 @@ li {
 }
 
 .create-new-spot-button {
-    position: absolute;
-    right: 250px;
-    top: 25px;
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    margin-right: 20px;
     cursor: pointer;
-    color: cornflowerblue;
+    color: black;
+    font-weight: bold;
+}
+.create-new-spot-button:hover {
+    background-color: black;
+    color: aliceblue;
+
 }
 
 .logout-button {
@@ -74,4 +88,19 @@ li {
     border-radius: 20px;
     padding: 10px 0;
     margin: 0 25px;
+}
+
+.modal-component {
+    border: 2px solid black;
+    background-color: aliceblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px;
+    width: 150px;
+    text-align: center;
+}
+.modal-component:hover {
+    background-color: black;
+    color: white;
 }
