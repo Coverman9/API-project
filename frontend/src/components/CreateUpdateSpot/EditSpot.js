@@ -1,27 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewSpotThunk } from "../../store/spots";
+import { useParams } from "react-router-dom";
+import { updateSpotThunk } from "../../store/spots";
 import { useHistory } from "react-router-dom";
+import "./CreateUpdate.css"
 
-function CreateNewSpot({ user }) {
+
+const EditSpot = () => {
+  const { spotId } = useParams();
+  const spots = useSelector((state) => state.spots);
+  const id = parseInt(spotId)
+  const spotRess = spots[spotId]
+
   const dispatch = useDispatch();
   const history = useHistory();
-  const [country, setCountry] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [lat, setLatitude] = useState(0);
-  const [lng, setLongitude] = useState(0);
-  const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
+
+  const [country, setCountry] = useState(spotRess?.country || "");
+  const [address, setAddress] = useState(spotRess?.address || "");
+  const [city, setCity] = useState(spotRess?.city || "");
+  const [state, setState] = useState(spotRess?.state || "");
+  const [lat, setLatitude] = useState(spotRess?.lat ||  0);
+  const [lng, setLongitude] = useState(spotRess?.lng || 0);
+  const [description, setDescription] = useState(spotRess?.description || "");
+  const [name, setName] = useState(spotRess?.name || "");
   const [image, setImage] = useState([]);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(spotRess?.price || 0);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newSpot = await dispatch(
-      createNewSpotThunk({
+      updateSpotThunk({
         country,
         address,
         city,
@@ -31,18 +40,15 @@ function CreateNewSpot({ user }) {
         description,
         name,
         price,
-        image,
+        spotId
       })
     );
     history.push(`/spot/${newSpot.id}`);
   };
-
   return (
     <>
-      <h1>Creat a New Spot</h1>
-      <form
-        onSubmit={handleSubmit}
-      >
+      <h1>Edit Spot</h1>
+      <form onSubmit={handleSubmit}>
         <h4>Where's your place located?</h4>
         <caption>
           Guests will only get your exact address once they booked a
@@ -142,40 +148,40 @@ function CreateNewSpot({ user }) {
             required
           />
           {/* <input
-            type="text"
-            placeholder="Image URL"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-           <input
-            type="text"
-            placeholder="Image URL"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-           <input
-            type="text"
-            placeholder="Image URL"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-           <input
-            type="text"
-            placeholder="Image URL"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-           <input
-            type="text"
-            placeholder="Image URL"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          /> */}
+              type="text"
+              placeholder="Image URL"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+             <input
+              type="text"
+              placeholder="Image URL"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+             <input
+              type="text"
+              placeholder="Image URL"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+             <input
+              type="text"
+              placeholder="Image URL"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+             <input
+              type="text"
+              placeholder="Image URL"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            /> */}
         </label>
-        <button type="submit">Create Spot</button>
+        <button type="submit">Update Spot</button>
       </form>
     </>
   );
-}
+};
 
-export default CreateNewSpot;
+export default EditSpot;

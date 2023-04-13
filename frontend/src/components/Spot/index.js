@@ -8,6 +8,7 @@ import "./Spot.css";
 import { Link } from "react-router-dom";
 import PostReviewModal from "../Modals/PostReviewModal";
 import { deleteReviewThunk } from "../../store/reviews";
+import { useModal } from "../../context/Modal";
 
 const SpotIndex = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -16,6 +17,7 @@ const SpotIndex = () => {
   const review = Object.values(reviewObj);
   const spot = Object.values(spotObj);
   const { spotId } = useParams();
+  const { closeModal } = useModal()
 
   let hasReviewd = review.find(rev => rev.userId === sessionUser.id)
 
@@ -137,7 +139,8 @@ const SpotIndex = () => {
                 {sessionUser?.id !== oneSpot.ownerId && sessionUser && (
                   <OpenModalMenuItem
                     itemText="Post Your Review"
-                    modalComponent={<PostReviewModal spotId={oneSpot.id} />}
+                    modalComponent={<PostReviewModal spotId={oneSpot.id}
+                    onModalClose = {closeModal} />}
                     buttonClassName="modal-component"
                   />
                 )}
