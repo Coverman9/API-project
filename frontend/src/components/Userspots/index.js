@@ -27,7 +27,7 @@ const UserSpots = () => {
     <>
       <h1>Manage Your Spots</h1>
       <div className="wrapper-div">
-        {spots.map((spot) => {
+        {spots.length && spots.map((spot) => {
           return (
             <>
               <div className="spots-div">

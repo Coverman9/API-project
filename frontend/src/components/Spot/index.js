@@ -7,7 +7,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import "./Spot.css";
 import { Link } from "react-router-dom";
 import PostReviewModal from "../Modals/PostReviewModal";
-import {deleteReviewThunk} from "../../store/reviews"
+import { deleteReviewThunk } from "../../store/reviews";
 
 const SpotIndex = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -15,9 +15,9 @@ const SpotIndex = () => {
   const reviewObj = useSelector((state) => state.reviews);
   const review = Object.values(reviewObj);
   const spot = Object.values(spotObj);
-  const {spotId} = useParams();
+  const { spotId } = useParams();
 
-  //console.log("rev", review);
+  let hasReviewd = review.find(rev => rev.userId === sessionUser.id)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,9 +29,9 @@ const SpotIndex = () => {
   }, [dispatch]);
 
   const deleteReview = (e, reviewId) => {
-    e.preventDefault()
-    dispatch(deleteReviewThunk(reviewId))
-  }
+    e.preventDefault();
+    dispatch(deleteReviewThunk(reviewId));
+  };
   const month = [
     0,
     "January",
@@ -77,7 +77,7 @@ const SpotIndex = () => {
               <div className="reserve-button-div">
                 <div className="price-div">
                   <p>${oneSpot.price} night</p>
-                  <p>★ {oneSpot.avgStarRating}</p>
+                  <p>★ {oneSpot.avgStarRating?.toFixed(1)}</p>
                   <p>Reviews: {oneSpot.numReviews}</p>
                 </div>
                 <button
@@ -91,37 +91,50 @@ const SpotIndex = () => {
             <hr />
             {oneSpot.avgStarRating !== 0 ? (
               <>
-                <p>★ {oneSpot.avgStarRating}</p>
+                {sessionUser?.id !== oneSpot.ownerId && sessionUser && !hasReviewd&&(
+                  <OpenModalMenuItem
+                    itemText="Post Your Review"
+                    modalComponent={<PostReviewModal spotId={oneSpot.id} />}
+                    buttonClassName="modal-component"
+                  />
+                )}
+                <p>★ {oneSpot.avgStarRating?.toFixed(1)}</p>
                 <p>Reviews: {oneSpot.numReviews}</p>
                 <div className="spot-reviews">
-                  {review.map((oneReview) => {
-                    //console.log("ONEREVIE ==>", oneReview)
-                    const reviewMonth = oneReview.createdAt.split("")[6];
-                    const year = oneReview.createdAt.split("-")[0];
-                    return (
-                      <>
-                        <div>
-                          <p>{oneReview.User.firstName}</p>
-                          <p>
-                            {month[reviewMonth]}, {year}
-                          </p>
-                          <p>{oneReview.review}</p>
-                          <p>⭐️ {oneReview.stars}</p>
-                          {sessionUser.id === oneReview.User.id && (
-                            <>
-                              <button className="delete-review-in-spot" onClick={(e) => deleteReview(e, oneReview.id)}>Delete</button>
-                            </>
-                          )}
-                        </div>
-                      </>
-                    );
-                  })}
+                  {review.length > 0 &&
+                    review.map((oneReview) => {
+                      //console.log("ONEREVIE ==>", oneReview)
+                      const reviewMonth = oneReview.createdAt.split("")[6];
+                      const year = oneReview.createdAt.split("-")[0];
+                      return (
+                        <>
+                          <div>
+                            <p>{oneReview.User?.firstName}</p>
+                            <p>
+                              {month[reviewMonth]}, {year}
+                            </p>
+                            <p>{oneReview?.review}</p>
+                            <p>⭐️ {oneReview?.stars}</p>
+                            {sessionUser?.id === oneReview.User?.id && (
+                              <>
+                                <button
+                                  className="delete-review-in-spot"
+                                  onClick={(e) => deleteReview(e, oneReview.id)}
+                                >
+                                  Delete
+                                </button>
+                              </>
+                            )}
+                          </div>
+                        </>
+                      );
+                    })}
                 </div>
               </>
             ) : (
               <>
                 <h3>★ New</h3>
-                {sessionUser.id !== oneSpot.ownerId && sessionUser && (
+                {sessionUser?.id !== oneSpot.ownerId && sessionUser && (
                   <OpenModalMenuItem
                     itemText="Post Your Review"
                     modalComponent={<PostReviewModal spotId={oneSpot.id} />}

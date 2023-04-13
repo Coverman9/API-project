@@ -37,14 +37,19 @@ const ReviewIndex = () => {
     dispatch(deleteReviewThunk(reviewId))
   }
 
+  let reviewMonth
+  let year
+
+  if(!reviews.length) return
+
 
   return (
     <>
       <h1>Manage Reviews</h1>
-      {reviews.map((review) => {
+      {reviews.length && reviews.map((review) => {
         console.log("CURRENTREVIEW =>", review);
-        const reviewMonth = review.createdAt.split("")[6];
-        const year = review.createdAt.split("-")[0];
+        reviewMonth = review.createdAt.split("")[6];
+        year = review.createdAt.split("-")[0];
         return (
           <>
             <div className="review-block">
