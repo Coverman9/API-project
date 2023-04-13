@@ -45,12 +45,14 @@ function CreateNewSpot({ user }) {
       });
   };
 
-  console.log(errors);
 
   return (
     <>
       <div className="create-update-main-div">
         <h1>Creat a New Spot</h1>
+        {errors.description && <p className="cr-up-errors">{errors.description}</p>}
+        {errors.lat && <p className="cr-up-errors">{errors.lat} for Latitude</p>}
+        {errors.lng && <p className="cr-up-errors">{errors.lng} for Longitude</p>}
         <form onSubmit={handleSubmit} className="create-update-form">
           <h4>Where's your place located?</h4>
           <p className="firstCapion">
@@ -175,7 +177,7 @@ function CreateNewSpot({ user }) {
               onChange={(e) => setImage(e.target.value)}
               required
             />
-            <input
+            {/* <input
               type="text"
               placeholder="Image URL"
               value={image}
@@ -204,7 +206,7 @@ function CreateNewSpot({ user }) {
               placeholder="Image URL"
               value={image}
               onChange={(e) => setImage(e.target.value)}
-            />
+            /> */}
           </label>
           <hr />
           <button type="submit" className="create-update-button">

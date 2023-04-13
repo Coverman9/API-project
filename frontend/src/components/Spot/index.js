@@ -19,7 +19,7 @@ const SpotIndex = () => {
   const { spotId } = useParams();
   const { closeModal } = useModal()
 
-  let hasReviewd = review.find(rev => rev.userId === sessionUser.id)
+  let hasReviewd = review.find(rev => rev.userId === sessionUser?.id)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -144,7 +144,7 @@ const SpotIndex = () => {
                     buttonClassName="modal-component"
                   />
                 )}
-                <h4>Be the first to post a review!</h4>
+                <h4 style={{marginTop:"20px"}}>Be the first to post a review!</h4>
               </>
             )}
           </>

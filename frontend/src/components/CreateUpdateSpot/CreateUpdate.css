@@ -42,3 +42,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
+.cr-up-errors {
+    color: red;
+}

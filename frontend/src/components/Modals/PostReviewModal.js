@@ -22,8 +22,8 @@ const PostReviewModal = ({ spotId }) => {
         stars,
         review,
       })
-    ).then(closeModal)
-    history.push(`/spot/${spotId}`)
+    ).then(closeModal,history.goForward())
+    console.log(history)
   };
   return (
     <>
