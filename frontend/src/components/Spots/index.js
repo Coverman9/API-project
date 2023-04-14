@@ -45,7 +45,7 @@ const SpotsIndex = () => {
                 </Link>
               </div>
             </>
-          );
+          ); 
         })}
       </div>
     </>
