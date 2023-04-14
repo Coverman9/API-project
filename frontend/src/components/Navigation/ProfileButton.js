@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
-    history.push("/")
+    history.push("/");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -57,11 +57,15 @@ function ProfileButton({ user }) {
             <li>email: {user.email}</li>
             <hr />
             <li onClick={closeMenu}>
-              <Link to={"/spots/current"}>Manage Spots</Link>
+              <div className="manage-spots-link">
+                <Link to={"/spots/current"}>Manage Spots</Link>
+              </div>
             </li>
-            <hr/>
+            <hr />
             <li onClick={closeMenu}>
-              <Link to={"/reviews/current"}>Manage Reviews</Link>
+              <div className="manage-spots-link">
+                <Link to={"/reviews/current"}>Manage Reviews</Link>
+              </div>
             </li>
             <hr />
             <li>

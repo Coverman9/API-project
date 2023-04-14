@@ -31,3 +31,37 @@
     display: flex;
     justify-content: center;
 }
+
+.delete-spot-modal {
+    padding: 50px;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+    background-color: rgb(208, 210, 210);
+}
+
+.delete-modal-buttons {
+    display: grid;
+}
+
+.delmodal {
+    padding: 10px 0;
+    margin-top: 10px;
+    border: 2px solid black;
+    color: white;
+    cursor: pointer;
+}
+
+.yes-delete-button {
+    background-color: brown
+}
+.yes-delete-button:hover {
+    background-color: rgb(150, 38, 38)
+}
+
+.no-delete-button {
+    background-color: cornflowerblue;
+}
+.no-delete-button:hover {
+    background-color: rgb(86, 128, 206);
+}
