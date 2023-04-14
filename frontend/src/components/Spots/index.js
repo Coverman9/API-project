@@ -32,7 +32,7 @@ const SpotsIndex = () => {
                       <div key={spot.id} className="spot-location">
                         {spot.name}, {spot.city}, {spot.state}
                       </div>
-                      <div>${spot.price} night</div>
+                      <div className="spot-price-div">${spot.price} night</div>
                     </div>
 
                     <div className="spots-review-star">

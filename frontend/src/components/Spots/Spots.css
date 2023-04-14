@@ -48,9 +48,14 @@
 }
 .all-spots-h1 {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
+    text-shadow: 3px 3px 3px white;
 }
-
+.spot-price-div {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 2px;
+}
 
 /* @media screen and (max-width: 1250px){
     .wrapper-div {

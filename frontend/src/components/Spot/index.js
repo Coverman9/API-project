@@ -56,7 +56,7 @@ const SpotIndex = () => {
         console.log("ONESPOT ==>", oneSpot);
         return (
           <>
-            <h1>{oneSpot.name}</h1>
+            <h1 className="spot-name-h1">{oneSpot.name}</h1>
             <p>
               Location: {oneSpot.city}, {oneSpot.state}, {oneSpot.country}
             </p>

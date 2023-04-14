@@ -81,3 +81,8 @@
 .spot-images-div img {
     max-width: 100%;
 }
+
+.spot-name-h1 {
+    color: rgb(83, 84, 84);
+    text-shadow: 4px 4px 4px rgb(252, 251, 251);
+}

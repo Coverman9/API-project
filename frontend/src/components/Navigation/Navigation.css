@@ -105,3 +105,18 @@ li {
     background-color: black;
     color: white;
 }
+
+.manage-spots-link {
+    border: 2px solid black;
+    text-align: center;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+    text-shadow: 2px 2px 1px white;
+    font-weight: bold;
+}
+.manage-spots-link:hover {
+    background-color: cornflowerblue;
+    color: aliceblue    ;
+}
