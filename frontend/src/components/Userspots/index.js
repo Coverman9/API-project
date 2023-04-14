@@ -67,7 +67,6 @@ const UserSpots = () => {
                             Update
                           </button>
                         </Link>
-
                         <div className="updel delete-spot-button">
                           <OpenModalMenuItem
                             itemText="Delete"
