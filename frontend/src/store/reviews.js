@@ -73,7 +73,11 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 export const getCurrentUserReviewsThunk = () => async (dispatch) => {
   const res = await csrfFetch("/api/reviews/current");
   const reviews = await res.json();
-  await dispatch(loadCurrentUserReviewsAction(reviews.Reviews));
+  if (reviews.Reviews[0].id) {
+    await dispatch(loadCurrentUserReviewsAction(reviews.Reviews));
+  } else {
+    await dispatch(loadCurrentUserReviewsAction([]));
+  }
 };
 
 // export const getReviewDetailThunk = (spotId) => async (dispatch) => {

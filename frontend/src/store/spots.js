@@ -59,11 +59,27 @@ export const getSpotDetailThunk = (spotId) => async (dispatch) => {
 export const getCurrentSpotsThunk = () => async (dispatch) => {
   const res = await csrfFetch("/api/spots/current");
   const spots = await res.json();
-  await dispatch(loadCurrentSpotsAction(spots.Spots));
+  console.log(spots.Spots)
+  if (spots.Spots[0].id) {
+    await dispatch(loadCurrentSpotsAction(spots.Spots));
+  } else {
+    await dispatch(loadCurrentSpotsAction([]));
+  }
 };
 
 export const updateSpotThunk =
-  ({ country, address, city, state, lat, lng, description, name, price, spotId }) =>
+  ({
+    country,
+    address,
+    city,
+    state,
+    lat,
+    lng,
+    description,
+    name,
+    price,
+    spotId,
+  }) =>
   async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
       method: "PUT",
