@@ -2,10 +2,13 @@ import { useState } from "react";
 import "./Modals.css";
 import { useDispatch } from "react-redux";
 import { createReviewThunk } from "../../store/reviews";
+import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 
 const PostReviewModal = ({ spotId }) => {
   const dispatch = useDispatch();
-
+  const history = useHistory()
+  const {closeModal} = useModal()
   const [stars, setStars] = useState(0);
   const [reviewStar, setReviewStar] = useState(0)
   const [review, setReview] = useState("");
@@ -19,7 +22,8 @@ const PostReviewModal = ({ spotId }) => {
         stars,
         review,
       })
-    );
+    ).then(closeModal,history.goForward())
+    console.log(history)
   };
   return (
     <>

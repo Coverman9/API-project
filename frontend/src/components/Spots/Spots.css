@@ -8,6 +8,17 @@
     margin-bottom: 5px;
     margin-top: 10px;
 }
+.spots-div{
+    position: relative;
+}
+.spots-div:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 30px;
+    left: 170px;
+    color: white;
+    text-shadow: 2px 2px black;
+}
 
 .spot-location {
     font-weight: bold;

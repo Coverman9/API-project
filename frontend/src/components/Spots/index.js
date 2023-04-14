@@ -20,7 +20,7 @@ const SpotsIndex = () => {
         {spots.map((spot) => {
           return (
             <>
-              <div className="spots-div">
+              <div className="spots-div" data-tooltip={spot.name}>
                 <Link to={`/spot/${spot.id}`}>
                   {spot.previewImage !== "No Preview Image Available" ? (
                     <img src={spot.previewImage}></img>

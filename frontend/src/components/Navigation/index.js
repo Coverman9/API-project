@@ -3,8 +3,6 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import CreateNewSpot from "./CreateNewSpot";
-import OpenModalMenuItem from "./OpenModalMenuItem";
 import "./Navigation.css";
 import logo from "./moelogo.png";
 

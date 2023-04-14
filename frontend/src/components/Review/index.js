@@ -9,7 +9,7 @@ import { getCurrentUserReviewsThunk } from "../../store/reviews";
 const ReviewIndex = () => {
   const reviewsObj = useSelector((state) => state.reviews);
   const reviews = Object.values(reviewsObj);
-  //console.log(reviews)
+  console.log(reviews)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -33,31 +33,45 @@ const ReviewIndex = () => {
   ];
 
   const deleteReview = (e, reviewId) => {
-    e.preventDefault()
-    dispatch(deleteReviewThunk(reviewId))
-  }
+    e.preventDefault();
+    dispatch(deleteReviewThunk(reviewId));
+  };
 
+  let reviewMonth;
+  let year;
 
   return (
     <>
-      <h1>Manage Reviews</h1>
-      {reviews.map((review) => {
-        console.log("CURRENTREVIEW =>", review);
-        const reviewMonth = review.createdAt.split("")[6];
-        const year = review.createdAt.split("-")[0];
-        return (
-          <>
-            <div className="review-block">
-              <h4>{review.Spot?.name}</h4>
-              <p>
-                {month[reviewMonth]}, {year}
-              </p>
-              <p>{review?.review}</p>
-              <button className="delete-review-button" onClick={(e) => deleteReview(e, review.id)}>Delete</button>
-            </div>
-          </>
-        );
-      })}
+      {reviews.length === 0 ? (
+        <h1>You dont have any reviews</h1>
+      ) : (
+        <>
+          <h1>Manage Reviews</h1>
+          {reviews.length &&
+            reviews.map((review) => {
+              console.log("CURRENTREVIEW =>", review);
+              reviewMonth = review.createdAt?.split("")[6];
+              year = review.createdAt?.split("-")[0];
+              return (
+                <>
+                  <div className="review-block">
+                    <h4>{review.Spot?.name}</h4>
+                    <p>
+                      {month[reviewMonth]}, {year}
+                    </p>
+                    <p>{review?.review}</p>
+                    <button
+                      className="delete-review-button"
+                      onClick={(e) => deleteReview(e, review.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              );
+            })}
+        </>
+      )}
     </>
   );
 };

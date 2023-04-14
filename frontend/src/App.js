@@ -6,8 +6,8 @@ import Navigation from "./components/Navigation";
 import SpotsIndex from "./components/Spots";
 import SpotIndex from "./components/Spot";
 import UserSpots from "./components/Userspots";
-import CreateNewSpot from "./components/Navigation/CreateNewSpot";
-import EditSpot from "./components/Navigation/EditSpot";
+import CreateNewSpot from "./components/CreateUpdateSpot/CreateNewSpot";
+import EditSpot from "./components/CreateUpdateSpot/EditSpot";
 import ReviewIndex from "./components/Review";
 
 function App() {

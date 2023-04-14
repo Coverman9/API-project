@@ -39,3 +39,22 @@
     background-color: cornflowerblue;
     color: white;
 }
+
+.review-info-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 175px;
+    font-size: larger;
+}
+
+.spot-reviews {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.spot-review {
+    border: 2px dashed black;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin: 10px 0px;
+}
