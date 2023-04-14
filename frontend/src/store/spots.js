@@ -79,6 +79,7 @@ export const updateSpotThunk =
     name,
     price,
     spotId,
+    image
   }) =>
   async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
@@ -98,7 +99,19 @@ export const updateSpotThunk =
         price,
       }),
     });
-    if (res.ok) {
+    const imagesArr = Object.values(image)
+    let res2;
+    for (let i = 0; i < imagesArr.length; i++) {
+      let image = imagesArr[i]
+      res2 = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({url: image, preview: true})
+      })
+    }
+    if (res2.ok) {
       const updatedSpot = await res.json();
       dispatch(editSpotAction(updatedSpot));
       return updatedSpot;

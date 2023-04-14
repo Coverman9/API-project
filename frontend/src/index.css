@@ -2,6 +2,6 @@
 body {
     max-width: 1200px;
     margin: 0 auto;
-    background-color: rgb(233, 232, 230);
-
+    background: rgb(246,246,246);
+    background: radial-gradient(circle, rgba(246,246,246,1) 0%, rgba(238,238,238,1) 36%, rgba(198,199,203,1) 72%, rgba(106,106,105,1) 100%);
 }

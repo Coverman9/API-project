@@ -64,6 +64,9 @@ function CreateNewSpot({ user }) {
         {errors.lng && (
           <p className="cr-up-errors">{errors.lng} for Longitude</p>
         )}
+         {errors.address && (
+          <p className="cr-up-errors">{errors.address}</p>
+        )}
         <form onSubmit={handleSubmit} className="create-update-form">
           <h4>Where's your place located?</h4>
           <p className="firstCapion">
