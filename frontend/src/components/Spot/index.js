@@ -17,9 +17,9 @@ const SpotIndex = () => {
   const review = Object.values(reviewObj);
   const spot = Object.values(spotObj);
   const { spotId } = useParams();
-  const { closeModal } = useModal()
+  const { closeModal } = useModal();
 
-  let hasReviewd = review.find(rev => rev.userId === sessionUser?.id)
+  let hasReviewd = review.find((rev) => rev.userId === sessionUser?.id);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -93,24 +93,33 @@ const SpotIndex = () => {
             <hr />
             {oneSpot.avgStarRating !== 0 ? (
               <>
-                {sessionUser?.id !== oneSpot.ownerId && sessionUser && !hasReviewd&&(
-                  <OpenModalMenuItem
-                    itemText="Post Your Review"
-                    modalComponent={<PostReviewModal spotId={oneSpot.id} />}
-                    buttonClassName="modal-component"
-                  />
-                )}
-                <p>★ {oneSpot.avgStarRating?.toFixed(1)}</p>
-                <p>Reviews: {oneSpot.numReviews}</p>
+                {sessionUser?.id !== oneSpot.ownerId &&
+                  sessionUser &&
+                  !hasReviewd && (
+                    <OpenModalMenuItem
+                      itemText="Post Your Review"
+                      modalComponent={<PostReviewModal spotId={oneSpot.id} />}
+                      buttonClassName="modal-component"
+                    />
+                  )}
+                <div className="review-info-block">
+                  <div>★ {oneSpot.avgStarRating?.toFixed(1)}</div>
+                  <div>·</div>
+                  {oneSpot.numReviews === 1 ? (
+                    <div>{oneSpot.numReviews} review</div>
+                  ) : (
+                    <div>{oneSpot.numReviews} reviews</div>
+                  )}
+                </div>
                 <div className="spot-reviews">
                   {review.length > 0 &&
                     review.map((oneReview) => {
                       //console.log("ONEREVIE ==>", oneReview)
-                      const reviewMonth = oneReview.createdAt.split("")[6];
-                      const year = oneReview.createdAt.split("-")[0];
+                      const reviewMonth = oneReview.createdAt?.split("")[6];
+                      const year = oneReview.createdAt?.split("-")[0];
                       return (
                         <>
-                          <div>
+                          <div className="spot-review">
                             <p>{oneReview.User?.firstName}</p>
                             <p>
                               {month[reviewMonth]}, {year}
@@ -139,12 +148,18 @@ const SpotIndex = () => {
                 {sessionUser?.id !== oneSpot.ownerId && sessionUser && (
                   <OpenModalMenuItem
                     itemText="Post Your Review"
-                    modalComponent={<PostReviewModal spotId={oneSpot.id}
-                    onModalClose = {closeModal} />}
+                    modalComponent={
+                      <PostReviewModal
+                        spotId={oneSpot.id}
+                        onModalClose={closeModal}
+                      />
+                    }
                     buttonClassName="modal-component"
                   />
                 )}
-                <h4 style={{marginTop:"20px"}}>Be the first to post a review!</h4>
+                <h4 style={{ marginTop: "20px" }}>
+                  Be the first to post a review!
+                </h4>
               </>
             )}
           </>

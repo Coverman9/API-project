@@ -40,7 +40,7 @@ const ReviewIndex = () => {
   let reviewMonth
   let year
 
-  if(!reviews.length) return
+
 
 
   return (
@@ -48,8 +48,8 @@ const ReviewIndex = () => {
       <h1>Manage Reviews</h1>
       {reviews.length && reviews.map((review) => {
         console.log("CURRENTREVIEW =>", review);
-        reviewMonth = review.createdAt.split("")[6];
-        year = review.createdAt.split("-")[0];
+        reviewMonth = review.createdAt?.split("")[6];
+        year = review.createdAt?.split("-")[0];
         return (
           <>
             <div className="review-block">
