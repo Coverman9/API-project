@@ -6,9 +6,12 @@
 }
 
 .delete-review-button {
+    border: 1px solid black;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    background-color: cornflowerblue;
+    background-color: brown;
     color: white;
+    width: 50px;
+    text-align: center;
 }

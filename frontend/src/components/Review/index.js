@@ -5,11 +5,12 @@ import "./Review.css";
 import { Link } from "react-router-dom";
 import { deleteReviewThunk } from "../../store/reviews";
 import { getCurrentUserReviewsThunk } from "../../store/reviews";
+import DeleteReviewModal from "../Modals/DeleteReviewModal";
 
 const ReviewIndex = () => {
   const reviewsObj = useSelector((state) => state.reviews);
   const reviews = Object.values(reviewsObj);
-  console.log(reviews)
+  console.log(reviews);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -60,12 +61,14 @@ const ReviewIndex = () => {
                       {month[reviewMonth]}, {year}
                     </p>
                     <p>{review?.review}</p>
-                    <button
-                      className="delete-review-button"
-                      onClick={(e) => deleteReview(e, review.id)}
-                    >
-                      Delete
-                    </button>
+                    <div className="delete-review-button">
+                      <OpenModalMenuItem
+                        itemText="Delete"
+                        modalComponent={
+                          <DeleteReviewModal reviewId={review.id} />
+                        }
+                      />
+                    </div>
                   </div>
                 </>
               );
