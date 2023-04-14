@@ -3,25 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentSpotsThunk } from "../../store/spots";
 import { Link } from "react-router-dom";
 import { deleteSpotThunk } from "../../store/spots";
-
 import "./Userspots.css";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteSpotModal from "../Modals/DeleteSpotModal";
 
 const UserSpots = () => {
   const spotsObj = useSelector((state) => state.spots);
   const spots = Object.values(spotsObj);
   const [showDeleteMenu, setShowDeleteMenu] = useState(false);
 
-  console.log("currentsspots", spotsObj)
+  // console.log("currentsspots", spotsObj)
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCurrentSpotsThunk());
   }, [dispatch]);
 
-  const deleteSpot = (e, spotId) => {
-    e.preventDefault();
-    dispatch(deleteSpotThunk(spotId));
-  };
+  // const deleteSpot = (e, spotId) => {
+  //   e.preventDefault();
+  //   dispatch(deleteSpotThunk(spotId));
+  // };
 
   return (
     <>
@@ -66,12 +67,15 @@ const UserSpots = () => {
                             Update
                           </button>
                         </Link>
-                        <button
-                          className="updel delete-spot-button"
-                          onClick={(e) => deleteSpot(e, spot.id)}
-                        >
-                          Delete
-                        </button>
+
+                        <div className="updel delete-spot-button">
+                          <OpenModalMenuItem
+                            itemText="Delete"
+                            modalComponent={
+                              <DeleteSpotModal spotId={spot.id} />
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                   </>
