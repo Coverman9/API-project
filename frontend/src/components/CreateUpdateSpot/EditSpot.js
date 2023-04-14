@@ -166,36 +166,30 @@ const EditSpot = () => {
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
-            {/* <input
+            <input
               type="text"
               placeholder="Image URL"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
-             <input
+            <input
               type="text"
               placeholder="Image URL"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
-             <input
+            <input
               type="text"
               placeholder="Image URL"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
-             <input
+            <input
               type="text"
               placeholder="Image URL"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
-             <input
-              type="text"
-              placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            /> */}
           </label>
           <button type="submit" className="create-update-button">
             Update Spot

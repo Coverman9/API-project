@@ -59,7 +59,7 @@ export const getSpotDetailThunk = (spotId) => async (dispatch) => {
 export const getCurrentSpotsThunk = () => async (dispatch) => {
   const res = await csrfFetch("/api/spots/current");
   const spots = await res.json();
-  console.log(spots.Spots)
+  console.log(spots.Spots);
   if (spots.Spots[0].id) {
     await dispatch(loadCurrentSpotsAction(spots.Spots));
   } else {
@@ -140,16 +140,20 @@ export const createNewSpotThunk =
       }),
     });
     const newSpot = await res.json();
-    const res2 = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ url: image, preview: true }),
-    });
+    const imagesArr = Object.values(image);
+    let res2;
+    for (let i = 0; i < imagesArr.length; i++) {
+      let image = imagesArr[i];
+      res2 = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: image, preview: true }),
+      });
+    }
     if (res2.ok) {
       dispatch(createNewSpotAction(newSpot));
-      // history.push(`/spot/${id}`)
       return newSpot;
     } else {
       const errors = await res.json();
