@@ -9,6 +9,7 @@ import UserSpots from "./components/Userspots";
 import CreateNewSpot from "./components/CreateUpdateSpot/CreateNewSpot";
 import EditSpot from "./components/CreateUpdateSpot/EditSpot";
 import ReviewIndex from "./components/Review";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
           <Route>Page Not found</Route>
         </Switch>
       )}
+      <Footer/>
     </>
   );
 }

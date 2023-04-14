@@ -15,7 +15,13 @@ function CreateNewSpot({ user }) {
   const [lng, setLongitude] = useState(0);
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState({
+    prevImg: "",
+    img2: "",
+    img3: "",
+    img4: "",
+    img5: "",
+  });
   const [price, setPrice] = useState(0);
   const [errors, setErrors] = useState({});
 
@@ -45,14 +51,22 @@ function CreateNewSpot({ user }) {
       });
   };
 
-
   return (
     <>
       <div className="create-update-main-div">
         <h1>Creat a New Spot</h1>
-        {errors.description && <p className="cr-up-errors">{errors.description}</p>}
-        {errors.lat && <p className="cr-up-errors">{errors.lat} for Latitude</p>}
-        {errors.lng && <p className="cr-up-errors">{errors.lng} for Longitude</p>}
+        {errors.description && (
+          <p className="cr-up-errors">{errors.description}</p>
+        )}
+        {errors.lat && (
+          <p className="cr-up-errors">{errors.lat} for Latitude</p>
+        )}
+        {errors.lng && (
+          <p className="cr-up-errors">{errors.lng} for Longitude</p>
+        )}
+         {errors.address && (
+          <p className="cr-up-errors">{errors.address}</p>
+        )}
         <form onSubmit={handleSubmit} className="create-update-form">
           <h4>Where's your place located?</h4>
           <p className="firstCapion">
@@ -173,40 +187,59 @@ function CreateNewSpot({ user }) {
             <input
               type="text"
               placeholder="Preview Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.prevImg}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  prevImg: e.target.value,
+                }))
+              }
               required
             />
-            {/* <input
+            <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img2}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img2: e.target.value,
+                }))
+              }
             />
             <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img3}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img3: e.target.value,
+                }))
+              }
             />
             <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img4}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img4: e.target.value,
+                }))
+              }
             />
             <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img5}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img5: e.target.value,
+                }))
+              }
             />
-            <input
-              type="text"
-              placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            /> */}
           </label>
           <hr />
           <button type="submit" className="create-update-button">

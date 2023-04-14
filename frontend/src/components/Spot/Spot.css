@@ -58,3 +58,26 @@
     padding-left: 10px;
     margin: 10px 0px;
 }
+
+
+.spot-images-styling {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+}
+
+.preview-image-div img{
+    max-width: 100%;
+}
+
+.spot-images-div {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    margin-left: 4px;
+}
+.spot-images-div img {
+    max-width: 100%;
+}

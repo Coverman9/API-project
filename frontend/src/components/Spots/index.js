@@ -15,7 +15,7 @@ const SpotsIndex = () => {
 
   return (
     <>
-      <h1>All spots</h1>
+      <h1 className="all-spots-h1">All spots</h1>
       <div className="wrapper-div">
         {spots.map((spot) => {
           return (

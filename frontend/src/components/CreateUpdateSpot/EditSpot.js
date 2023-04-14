@@ -22,7 +22,13 @@ const EditSpot = () => {
   const [lng, setLongitude] = useState(spotRess?.lng || 0);
   const [description, setDescription] = useState(spotRess?.description || "");
   const [name, setName] = useState(spotRess?.name || "");
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState({
+    prevImg: "",
+    img2: "",
+    img3: "",
+    img4: "",
+    img5: "",
+  });
   const [price, setPrice] = useState(spotRess?.price || 0);
   const [errors, setErrors] = useState({});
 
@@ -40,6 +46,7 @@ const EditSpot = () => {
         name,
         price,
         spotId,
+        image
       })
     )
       .then((newSpot) => history.push(`/spot/${newSpot.id}`))
@@ -163,39 +170,58 @@ const EditSpot = () => {
             <input
               type="text"
               placeholder="Preview Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.prevImg}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img2: e.target.value,
+                }))
+              }
             />
-            {/* <input
+            <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img2}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img3: e.target.value,
+                }))
+              }
             />
-             <input
+            <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img3 }
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img4: e.target.value,
+                }))
+              }
             />
-             <input
+            <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img4}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  img5: e.target.value,
+                }))
+              }
             />
-             <input
+            <input
               type="text"
               placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={image.img5}
+              onChange={(e) =>
+                setImage((prevState) => ({
+                  ...prevState,
+                  prevImg: e.target.value,
+                }))
+              }
             />
-             <input
-              type="text"
-              placeholder="Image URL"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            /> */}
           </label>
           <button type="submit" className="create-update-button">
             Update Spot

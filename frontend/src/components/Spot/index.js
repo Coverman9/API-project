@@ -53,21 +53,27 @@ const SpotIndex = () => {
   return (
     <>
       {spot.map((oneSpot) => {
-        //console.log("ONESPOT ==>", oneSpot);
+        console.log("ONESPOT ==>", oneSpot);
         return (
           <>
             <h1>{oneSpot.name}</h1>
             <p>
               Location: {oneSpot.city}, {oneSpot.state}, {oneSpot.country}
             </p>
-
-            {oneSpot.SpotImages?.length ? (
-              oneSpot.SpotImages.map((img) => (
-                <img className="spot-detail-images" src={img.url}></img>
-              ))
-            ) : (
-              <img src="https://ftcollinshomes.com/wp-content/uploads/2015/06/nophotoavailable.png"></img>
-            )}
+            <div className="spot-images-styling">
+              <div className="preview-image-div">
+                <img src={oneSpot.SpotImages?.[0]?.url}></img>
+              </div>
+              <div className="spot-images-div">
+                {oneSpot.SpotImages?.length ? (
+                  oneSpot.SpotImages.slice(1).map((img) => (
+                    <img className="spot-detail-images" src={img.url}></img>
+                  ))
+                ) : (
+                  <img src="https://ftcollinshomes.com/wp-content/uploads/2015/06/nophotoavailable.png"></img>
+                )}
+              </div>
+            </div>
             <div className="wrapper-info-reserve">
               <div className="spot-info-div">
                 <h4>
