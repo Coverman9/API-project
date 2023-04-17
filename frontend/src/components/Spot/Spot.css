@@ -58,7 +58,26 @@
     padding-left: 10px;
     margin: 10px 0px;
 }
-
+.spot-review-name {
+    font-weight: bold;
+    background-color: rgb(146, 162, 227);
+    border-radius: 10px;
+    margin-right: 190px;
+    margin-left: 190px;
+    font-size: 20px;
+    text-align: center;
+}
+.spot-review-date {
+    text-align: end;
+    padding-right: 10px;
+}
+.spot-review-review {
+    font-family: cursive;
+    font-size: 20px;
+}
+.spot-review-stars {
+    font-size: 20px;
+}
 
 .spot-images-styling {
     display: grid;
@@ -85,4 +104,8 @@
 .spot-name-h1 {
     color: rgb(83, 84, 84);
     text-shadow: 4px 4px 4px rgb(252, 251, 251);
+}
+
+.star-review {
+    font-size: 30px;
 }
