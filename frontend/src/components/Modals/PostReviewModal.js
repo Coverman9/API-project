@@ -4,13 +4,14 @@ import { useDispatch } from "react-redux";
 import { createReviewThunk } from "../../store/reviews";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import { getAllReviewsThunk } from "../../store/reviews";
 
 const PostReviewModal = ({ spotId }) => {
   const dispatch = useDispatch();
-  const history = useHistory()
-  const {closeModal} = useModal()
+  const history = useHistory();
+  const { closeModal } = useModal();
   const [stars, setStars] = useState(0);
-  const [reviewStar, setReviewStar] = useState(0)
+  const [reviewStar, setReviewStar] = useState(0);
   const [review, setReview] = useState("");
 
   const handleSubmit = async (e) => {
@@ -22,8 +23,10 @@ const PostReviewModal = ({ spotId }) => {
         stars,
         review,
       })
-    ).then(closeModal,history.goForward())
+      // ).then(dispatch(getAllReviewsThunk(spotId)));
+    ).then(closeModal, history.goForward());
   };
+
   return (
     <>
       <div className="create-review-main-div">

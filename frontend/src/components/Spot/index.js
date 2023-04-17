@@ -8,6 +8,7 @@ import "./Spot.css";
 import { Link } from "react-router-dom";
 import PostReviewModal from "../Modals/PostReviewModal";
 import { deleteReviewThunk } from "../../store/reviews";
+import DeleteReviewModal from "../Modals/DeleteReviewModal";
 import { useModal } from "../../context/Modal";
 
 const SpotIndex = () => {
@@ -30,10 +31,10 @@ const SpotIndex = () => {
     dispatch(getAllReviewsThunk(spotId));
   }, [dispatch]);
 
-  const deleteReview = (e, reviewId) => {
-    e.preventDefault();
-    dispatch(deleteReviewThunk(reviewId));
-  };
+  // const deleteReview = (e, reviewId) => {
+  //   e.preventDefault();
+  //   dispatch(deleteReviewThunk(reviewId));
+  // };
   const month = [
     0,
     "January",
@@ -109,7 +110,9 @@ const SpotIndex = () => {
                     />
                   )}
                 <div className="review-info-block">
-                  <div className="star-review">★ {oneSpot.avgStarRating?.toFixed(1)}</div>
+                  <div className="star-review">
+                    ★ {oneSpot.avgStarRating?.toFixed(1)}
+                  </div>
                   <div>·</div>
                   {oneSpot.numReviews === 1 ? (
                     <div>{oneSpot.numReviews} review</div>
@@ -142,12 +145,16 @@ const SpotIndex = () => {
                             </div>
                             {sessionUser?.id === oneReview.User?.id && (
                               <>
-                                <button
-                                  className="delete-review-in-spot"
-                                  onClick={(e) => deleteReview(e, oneReview.id)}
-                                >
-                                  Delete
-                                </button>
+                                <div className="delete-review-button">
+                                  <OpenModalMenuItem
+                                    itemText="Delete"
+                                    modalComponent={
+                                      <DeleteReviewModal
+                                        reviewId={oneReview.id}
+                                      />
+                                    }
+                                  />
+                                </div>
                               </>
                             )}
                           </div>
