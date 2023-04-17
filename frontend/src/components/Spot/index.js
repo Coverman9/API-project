@@ -109,7 +109,7 @@ const SpotIndex = () => {
                     />
                   )}
                 <div className="review-info-block">
-                  <div>★ {oneSpot.avgStarRating?.toFixed(1)}</div>
+                  <div className="star-review">★ {oneSpot.avgStarRating?.toFixed(1)}</div>
                   <div>·</div>
                   {oneSpot.numReviews === 1 ? (
                     <div>{oneSpot.numReviews} review</div>
@@ -126,12 +126,20 @@ const SpotIndex = () => {
                       return (
                         <>
                           <div className="spot-review">
-                            <p>{oneReview.User?.firstName}</p>
-                            <p>
-                              {month[reviewMonth]}, {year}
-                            </p>
-                            <p>{oneReview?.review}</p>
-                            <p>⭐️ {oneReview?.stars}</p>
+                            <div className="spot-review-name">
+                              <p>{oneReview.User?.firstName}</p>
+                            </div>
+                            <div className="spot-review-date">
+                              <p>
+                                {month[reviewMonth]}, {year}
+                              </p>
+                            </div>
+                            <div className="spot-review-review">
+                              <p>{oneReview?.review}</p>
+                            </div>
+                            <div className="spot-review-stars">
+                              <p>★ {oneReview?.stars}</p>
+                            </div>
                             {sessionUser?.id === oneReview.User?.id && (
                               <>
                                 <button

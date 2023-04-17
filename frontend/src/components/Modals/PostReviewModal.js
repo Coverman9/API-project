@@ -15,7 +15,7 @@ const PostReviewModal = ({ spotId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submiting")
+    //console.log("submiting")
     await dispatch(
       createReviewThunk({
         spotId,
@@ -23,7 +23,6 @@ const PostReviewModal = ({ spotId }) => {
         review,
       })
     ).then(closeModal,history.goForward())
-    console.log(history)
   };
   return (
     <>

@@ -13,12 +13,14 @@ function LoginFormModal() {
   const { closeModal } = useModal();
 
   useEffect(() => {
-    const err = {};
-    if (credential.length < 4)
-      err.credential = "Credentials must be more than 4 characters";
-    if (password.length < 6)
-      err.password = "Password must be more than 6 characters";
-    setErrors(err);
+    if (!errors) {
+      const err = {};
+      if (credential.length < 4)
+        err.credential = "Credentials must be more than 4 characters";
+      if (password.length < 6)
+        err.password = "Password must be more than 6 characters";
+      setErrors(err);
+    }
   }, [credential, password]);
 
   const handleSubmit = (e) => {
@@ -32,6 +34,15 @@ function LoginFormModal() {
           setErrors(data.errors);
         }
       });
+  };
+
+  const loginDemoUser = () => {
+    return dispatch(
+      sessionActions.login({
+        credential: "Demo-lition",
+        password: "password",
+      })
+    ).then(closeModal);
   };
 
   return (
@@ -57,7 +68,11 @@ function LoginFormModal() {
               required
             />
           </label>
-          {errors.credential && <p className="login-errors">The provided credentials were invalid</p>}
+          {errors.credential && (
+            <p className="login-errors">
+              The provided credentials were invalid
+            </p>
+          )}
           <button
             disabled={!!Object.values(errors).length}
             className="login-button"
@@ -65,6 +80,11 @@ function LoginFormModal() {
           >
             Log In
           </button>
+          <div>
+            <button onClick={loginDemoUser} className="demo-user-button">
+              Demo-user
+            </button>
+          </div>
         </form>
       </div>
     </>
