@@ -5,6 +5,7 @@ import { createReviewThunk } from "../../store/reviews";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { getAllReviewsThunk } from "../../store/reviews";
+import { getSpotDetailThunk } from "../../store/spots";
 
 const PostReviewModal = ({ spotId }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const PostReviewModal = ({ spotId }) => {
         review,
       })
       // ).then(dispatch(getAllReviewsThunk(spotId)));
-    ).then(closeModal, history.goForward());
+    ).then(closeModal, dispatch(getSpotDetailThunk(spotId)));
   };
 
   return (

@@ -15,13 +15,11 @@ const SpotIndex = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const spotObj = useSelector((state) => state.spots);
   const reviewObj = useSelector((state) => state.reviews);
-  const review = Object.values(reviewObj);
   const spot = Object.values(spotObj);
+  const review = Object.values(reviewObj);
   const { spotId } = useParams();
   const { closeModal } = useModal();
-
   let hasReviewd = review.find((rev) => rev.userId === sessionUser?.id);
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSpotDetailThunk(spotId));
@@ -54,7 +52,6 @@ const SpotIndex = () => {
   return (
     <>
       {spot.map((oneSpot) => {
-        console.log("ONESPOT ==>", oneSpot);
         return (
           <>
             <h1 className="spot-name-h1">{oneSpot.name}</h1>
@@ -150,7 +147,7 @@ const SpotIndex = () => {
                                     itemText="Delete"
                                     modalComponent={
                                       <DeleteReviewModal
-                                        reviewId={oneReview.id}
+                                        reviewId={oneReview.id} spotId={spotId}
                                       />
                                     }
                                   />
