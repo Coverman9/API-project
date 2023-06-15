@@ -109,3 +109,8 @@
 .star-review {
     font-size: 30px;
 }
+
+.reserve-checkinout {
+    display: flex;
+    justify-content: space-around;
+}

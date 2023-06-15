@@ -11,3 +11,13 @@
     margin-top: 20px;
 
 }
+
+.cancel-book {
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: 2px solid black;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: brown;
+}
