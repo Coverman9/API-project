@@ -10,8 +10,17 @@ import PostReviewModal from "../Modals/PostReviewModal";
 import { deleteReviewThunk } from "../../store/reviews";
 import DeleteReviewModal from "../Modals/DeleteReviewModal";
 import { useModal } from "../../context/Modal";
+import { useState } from "react";
+import { createBookingThunk } from "../../store/bookings";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const SpotIndex = () => {
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [errors, setErrors] = useState({});
+  let year = new Date().getFullYear().toString();
+  let month2 = new Date().getMonth();
+  let day = new Date().getDate().toString();
   const sessionUser = useSelector((state) => state.session.user);
   const spotObj = useSelector((state) => state.spots);
   const reviewObj = useSelector((state) => state.reviews);
@@ -21,6 +30,7 @@ const SpotIndex = () => {
   const { closeModal } = useModal();
   let hasReviewd = review.find((rev) => rev.userId === sessionUser?.id);
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     dispatch(getSpotDetailThunk(spotId));
   }, [dispatch]);
@@ -48,6 +58,27 @@ const SpotIndex = () => {
     "November",
     "December",
   ];
+
+  const createReserve = async (e) => {
+    e.preventDefault();
+    if (spot.map((owner) => owner.ownerId).includes(sessionUser.id)) {
+      setErrors({
+        message: "Can't create booking for your own property",
+      });
+    }
+    await dispatch(
+      createBookingThunk({
+        spotId,
+        startDate,
+        endDate,
+      })
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    });
+  };
 
   return (
     <>
@@ -86,10 +117,40 @@ const SpotIndex = () => {
                   <p>★ {oneSpot.avgStarRating?.toFixed(1)}</p>
                   <p>Reviews: {oneSpot.numReviews}</p>
                 </div>
-                <button
-                  className="reserve-button"
-                  onClick={() => alert("Feature coming soon")}
-                >
+                <div className="reserve-checkinout">
+                  <div>
+                    CHECK-IN:
+                    <label>
+                      <input
+                        type="date"
+                        name="check-in"
+                        min={`${year}-0${(month2 + 1).toString()}-${day}`}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        required
+                      />
+                      <span class="validity"></span>
+                    </label>
+                  </div>
+                  <div>
+                    CHECKOUT:
+                    <label>
+                      <input
+                        type="date"
+                        name="checkout"
+                        min={`${year}-0${(month2 + 1).toString()}-${day}`}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        required
+                      />
+                      <span class="validity"></span>
+                    </label>
+                  </div>
+                </div>
+                <div style={{ color: "red" }}>
+                  {errors && errors.startDate}
+                  {errors && errors.endDate}
+                  {errors && errors.message}
+                </div>
+                <button className="reserve-button" onClick={createReserve}>
                   Reserve
                 </button>
               </div>
@@ -147,7 +208,8 @@ const SpotIndex = () => {
                                     itemText="Delete"
                                     modalComponent={
                                       <DeleteReviewModal
-                                        reviewId={oneReview.id} spotId={spotId}
+                                        reviewId={oneReview.id}
+                                        spotId={spotId}
                                       />
                                     }
                                   />
