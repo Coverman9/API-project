@@ -61,6 +61,7 @@ const SpotIndex = () => {
 
   const createReserve = async (e) => {
     e.preventDefault();
+    if (!sessionUser) return setErrors({message: "Please Log in first"})
     if (spot.map((owner) => owner.ownerId).includes(sessionUser.id)) {
       setErrors({
         message: "Can't create booking for your own property",
