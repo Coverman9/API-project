@@ -128,3 +128,22 @@ li {
     background-color: cornflowerblue;
     color: aliceblue    ;
 }
+
+.github-button {
+    font-size: 25px;
+    margin-top: 30px;
+}
+
+.github-button i {
+    color: rgb(33, 134, 222);
+}
+
+.linkedin-button {
+    font-size: 25px;
+    margin-top: 30px;
+
+}
+
+.linkedin-button i {
+    color: rgb(33, 134, 222);
+}
