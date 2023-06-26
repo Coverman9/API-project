@@ -74,7 +74,6 @@ function LoginFormModal() {
             </p>
           )}
           <button
-            disabled={!!Object.values(errors).length}
             className="login-button"
             type="submit"
           >

@@ -8,7 +8,6 @@ import logo from "./moelogo.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-  // console.log("sessionUser =>",sessionUser)
   return (
     <ul className="home-ul">
       <li className="home-button">
@@ -19,16 +18,28 @@ function Navigation({ isLoaded }) {
           </div>
         </NavLink>
       </li>
+      <li className="github-button">
+        <a className="logo-div" href="https://github.com/Coverman9/AirDnd-project">
+          <i class="fa-brands fa-github fa-2xl"></i>
+        </a>
+      </li>
+      <li className="linkedin-button">
+        <a className="logo-div" href="https://www.linkedin.com/in/emir-usubaliev-5904b0235/">
+          <i class="fa-brands fa-linkedin fa-2xl"></i>
+        </a>
+      </li>
       {isLoaded && (
         <li className="profile-button-li">
           <div className="create-and-profile-div">
             <div className="profile-button-div">
               <ProfileButton user={sessionUser} />
             </div>
-            <div >
+            <div>
               {sessionUser && (
                 <Link to={"/spots/new"}>
-                  <div className="create-new-spot-button">Create a New Spot</div>
+                  <div className="create-new-spot-button">
+                    Create a New Spot
+                  </div>
                 </Link>
               )}
             </div>
