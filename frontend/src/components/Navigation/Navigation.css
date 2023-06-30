@@ -138,6 +138,10 @@ li {
     color: rgb(33, 134, 222);
 }
 
+.github-button i:hover {
+    color: rgb(25, 105, 175);
+}
+
 .linkedin-button {
     font-size: 25px;
     margin-top: 30px;
@@ -146,4 +150,8 @@ li {
 
 .linkedin-button i {
     color: rgb(33, 134, 222);
+}
+
+.linkedin-button i:hover {
+    color: rgb(25, 105, 175);
 }

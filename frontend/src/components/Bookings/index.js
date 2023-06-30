@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBookingThunk, getCurrentUserBookingsThunk } from "../../store/bookings";
+import {
+  deleteBookingThunk,
+  getCurrentUserBookingsThunk,
+} from "../../store/bookings";
 import "./Bookings.css";
 
 const Bookings = () => {
   const bookingsObj = useSelector((state) => state.bookings);
   const bookings = Object.values(bookingsObj);
+  const [errors, setErrors] = useState({});
 
-  console.log(bookings);
+  console.log(errors);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +21,12 @@ const Bookings = () => {
 
   const onClick = async (e, bookingId) => {
     e.preventDefault();
-    dispatch(deleteBookingThunk(bookingId));
+    return dispatch(deleteBookingThunk(bookingId)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.message) {
+        setErrors({message: data.message, bookingId});
+      }
+    });
   };
   return (
     <>
@@ -33,10 +42,21 @@ const Bookings = () => {
                 />
                 <div>
                   <h3>{booking?.Spot?.name}</h3>
-                  <h3>{booking?.Spot?.city}, {booking?.Spot?.country} {booking?.Spot?.state}</h3>
+                  <h3>
+                    {booking?.Spot?.city}, {booking?.Spot?.country}{" "}
+                    {booking?.Spot?.state}
+                  </h3>
                   <h3>State Date: {booking.startDate.slice(0, 10)}</h3>
                   <h3>End Date: {booking.endDate.slice(0, 10)}</h3>
-                  <button className="cancel-book" onClick={(e) => onClick(e, booking.id)}>Cancel</button>
+                  {errors && booking.id === errors.bookingId && (
+                    <p style={{color:"red", fontWeight:"bold"}}>{errors.message}</p>
+                  )}
+                  <button
+                    className="cancel-book"
+                    onClick={(e) => onClick(e, booking.id)}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             </div>
